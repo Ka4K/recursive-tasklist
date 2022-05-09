@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ITask } from '../interface/task';
+import { newTask } from '../interface/task';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +9,18 @@ import { ITask } from '../interface/task';
 })
 export class HomePage {
   changemode: boolean = false;
+  showform: boolean = true;
   task: ITask = {
     name: 'dumy',
+    duedate: '',
     children: [
-      { name: '1', children: [] },
+      newTask('1'),
       {
         name: '2',
+        duedate: '',
         children: [
-          { name: '3', children: [] },
-          { name: '4', children: [{ name: '5', children: [] }] },
+          { name: '3', duedate: '', children: [] },
+          { name: '4', duedate: '', children: [newTask('5')] },
         ],
       },
     ],
@@ -24,6 +28,6 @@ export class HomePage {
   taskname: string;
   constructor() {}
   addTask() {
-    this.task.children.push({ name: this.taskname, children: [] });
+    this.task.children.push(newTask(this.taskname));
   }
 }

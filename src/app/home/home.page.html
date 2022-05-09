@@ -4,10 +4,10 @@
     <ion-buttons slot="end">
       <ion-button (click)="changemode=!changemode">
         <span *ngIf="!changemode">
-          <ion-icon name="pencil-outline"></ion-icon>
+          <ion-icon name="pencil"></ion-icon>
         </span>
         <span *ngIf="changemode">
-          <ion-icon name="eye-outline"></ion-icon>
+          <ion-icon name="eye"></ion-icon>
         </span>
       </ion-button>
     </ion-buttons>
@@ -15,21 +15,26 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form class="ion-padding" (submit)="addTask()" #f="ngForm">
-    <ion-item lines="full" class="ion-padding-bottom">
-      <ion-label position="floating">タスク</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="taskname"
-        name="task"
-        required
-        minlength="3"
-        maxlength="20"
-      ></ion-input>
-    </ion-item>
-    <ion-button expand="block" type="submit" [disabled]="!f.form.valid"
-      >追加</ion-button
-    >
-  </form>
+  <span *ngIf="showform">
+    <form class="ion-padding" (submit)="addTask()" #f="ngForm">
+      <ion-item lines="full" class="ion-padding-bottom">
+        <ion-label position="floating">タスク</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="taskname"
+          name="task"
+          required
+          minlength="3"
+          maxlength="20"
+        ></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="!f.form.valid">追加</ion-button>
+    </form>
+  </span>
+
+  <ion-button fill="clear" (click)="showform=!showform"
+    ><span *ngIf="showform"><ion-icon name="arrow-up"></ion-icon></span>
+    <span *ngIf="!showform"><ion-icon name="arrow-down"></ion-icon></span>
+  </ion-button>
   <app-show-tasks [task]="task" [change]="changemode"> </app-show-tasks>
 </ion-content>

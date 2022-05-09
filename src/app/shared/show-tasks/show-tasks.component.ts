@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITask } from 'src/app/interface/task';
+import { ITask, newTask } from 'src/app/interface/task';
 import { ActionSheetController, AlertController } from '@ionic/angular';
 
 @Component({
@@ -54,7 +54,7 @@ export class ShowTasksComponent implements OnInit {
   hasChildren(t: ITask) {
     return t.children.length;
   }
-  async _createPrompt(
+  async _createTextPrompt(
     header: string,
     value: string,
     operation: (any) => boolean | void
@@ -81,7 +81,7 @@ export class ShowTasksComponent implements OnInit {
     prompt.present();
   }
   async _renameTask(index: number) {
-    this._createPrompt(
+    this._createTextPrompt(
       '変更後のタスク',
       this.task.children[index].name,
       (data) => {
@@ -90,11 +90,8 @@ export class ShowTasksComponent implements OnInit {
     );
   }
   async _createChild(index: number) {
-    this._createPrompt('子タスクの名前', '', (data) => {
-      this.task.children[index].children.push({
-        name: data.task,
-        children: [],
-      });
+    this._createTextPrompt('子タスクの名前', '', (data) => {
+      this.task.children[index].children.push(newTask(data.task));
     });
   }
 }
