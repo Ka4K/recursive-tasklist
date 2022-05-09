@@ -27,10 +27,17 @@ export class ShowTasksComponent implements OnInit {
           },
         },
         {
-          text: '変更',
+          text: '子タスクの追加',
           icon: 'create',
           handler: () => {
-            //this._renameTask(index);
+            this._createChild(index);
+          },
+        },
+        {
+          text: '変更',
+          icon: 'sync',
+          handler: () => {
+            this._renameTask(index);
           },
         },
         {
@@ -46,5 +53,48 @@ export class ShowTasksComponent implements OnInit {
   ngOnInit() {}
   hasChildren(t: ITask) {
     return t.children.length;
+  }
+  async _createPrompt(
+    header: string,
+    value: string,
+    operation: (any) => boolean | void
+  ) {
+    const prompt = await this.alertController.create({
+      header: header,
+      inputs: [
+        {
+          name: 'task',
+          placeholder: 'タスク',
+          value: value,
+        },
+      ],
+      buttons: [
+        {
+          text: '閉じる',
+        },
+        {
+          text: '保存',
+          handler: operation,
+        },
+      ],
+    });
+    prompt.present();
+  }
+  async _renameTask(index: number) {
+    this._createPrompt(
+      '変更後のタスク',
+      this.task.children[index].name,
+      (data) => {
+        this.task.children[index].name = data.task;
+      }
+    );
+  }
+  async _createChild(index: number) {
+    this._createPrompt('子タスクの名前', '', (data) => {
+      this.task.children[index].children.push({
+        name: data.task,
+        children: [],
+      });
+    });
   }
 }
