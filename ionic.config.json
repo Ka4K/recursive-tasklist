@@ -1,0 +1,7 @@
+{
+  "name": "recursive-tasklist",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
