@@ -7,19 +7,23 @@ import { ITask } from '../interface/task';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  tasks: ITask[] = [
-    { name: '1', children: [] },
-    {
-      name: '2',
-      children: [
-        { name: '3', children: [] },
-        { name: '4', children: [{ name: '5', children: [] }] },
-      ],
-    },
-  ];
-  task: string;
+  changemode: boolean = false;
+  task: ITask = {
+    name: 'dumy',
+    children: [
+      { name: '1', children: [] },
+      {
+        name: '2',
+        children: [
+          { name: '3', children: [] },
+          { name: '4', children: [{ name: '5', children: [] }] },
+        ],
+      },
+    ],
+  };
+  taskname: string;
   constructor() {}
   addTask() {
-    this.tasks.push({ name: this.task, children: [] });
+    this.task.children.push({ name: this.taskname, children: [] });
   }
 }

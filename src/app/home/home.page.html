@@ -1,6 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> タスク管理 </ion-title>
+    <ion-title> タスク追加 </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="changemode=!changemode">
+        <span *ngIf="!changemode">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </span>
+        <span *ngIf="changemode">
+          <ion-icon name="eye-outline"></ion-icon>
+        </span>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +20,7 @@
       <ion-label position="floating">タスク</ion-label>
       <ion-input
         type="text"
-        [(ngModel)]="task"
+        [(ngModel)]="taskname"
         name="task"
         required
         minlength="3"
@@ -21,7 +31,5 @@
       >追加</ion-button
     >
   </form>
-  <ion-accordion-group
-    ><app-show-tasks [tasks]="tasks"> </app-show-tasks
-  ></ion-accordion-group>
+  <app-show-tasks [task]="task" [change]="changemode"> </app-show-tasks>
 </ion-content>
