@@ -6,7 +6,7 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { UpdateTaskModalComponent } from 'src/app/update-task-modal/update-task-modal.component';
-
+import { MakeChildModalComponent } from 'src/app/make-child-modal/make-child-modal.component';
 @Component({
   selector: 'app-show-tasks',
   templateUrl: './show-tasks.component.html',
@@ -60,32 +60,6 @@ export class ShowTasksComponent implements OnInit {
   hasChildren(t: ITask) {
     return t.children.length;
   }
-  async _createTextPrompt(
-    header: string,
-    value: string,
-    operation: (any) => boolean | void
-  ): Promise<void> {
-    const prompt = await this.alertController.create({
-      header: header,
-      inputs: [
-        {
-          name: 'task',
-          placeholder: 'タスク',
-          value: value,
-        },
-      ],
-      buttons: [
-        {
-          text: '閉じる',
-        },
-        {
-          text: '保存',
-          handler: operation,
-        },
-      ],
-    });
-    prompt.present();
-  }
   async _renameTask(index: number) {
     const modal = await this.modalCtrl.create({
       component: UpdateTaskModalComponent,
@@ -96,8 +70,12 @@ export class ShowTasksComponent implements OnInit {
     await modal.present();
   }
   async _createChild(index: number) {
-    this._createTextPrompt('子タスクの名前', '', (data) => {
-      this.task.children[index].children.push(newTask(data.task));
+    const modal = await this.modalCtrl.create({
+      component: MakeChildModalComponent,
+      componentProps: {
+        parent: this.task.children[index],
+      },
     });
+    await modal.present();
   }
 }

@@ -5,12 +5,14 @@ import { ShowDateComponent } from './show-date/show-date.component';
 import { ManipulationTaskComponent } from './manipulation-task/manipulation-task.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
+import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.component';
 
 @NgModule({
   declarations: [
     ShowDateComponent,
     ManipulationTaskComponent,
     UpdateTaskModalComponent,
+    MakeChildModalComponent,
   ],
   exports: [ShowDateComponent, ManipulationTaskComponent],
   imports: [IonicModule, CommonModule, FormsModule],
