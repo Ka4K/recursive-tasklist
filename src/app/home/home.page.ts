@@ -10,6 +10,8 @@ import { newTask } from '../interface/task';
 export class HomePage {
   changemode: boolean = false;
   showform: boolean = true;
+  taskname: string;
+  duedate: string = '';
   task: ITask = {
     name: 'dumy',
     duedate: '',
@@ -25,9 +27,10 @@ export class HomePage {
       },
     ],
   };
-  taskname: string;
   constructor() {}
   addTask() {
-    this.task.children.push(newTask(this.taskname));
+    this.task.children.push(newTask(this.taskname, this.duedate));
+    this.duedate = '';
+    this.taskname = '';
   }
 }

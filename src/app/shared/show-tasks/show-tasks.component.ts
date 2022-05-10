@@ -58,7 +58,7 @@ export class ShowTasksComponent implements OnInit {
     header: string,
     value: string,
     operation: (any) => boolean | void
-  ) {
+  ): Promise<void> {
     const prompt = await this.alertController.create({
       header: header,
       inputs: [
