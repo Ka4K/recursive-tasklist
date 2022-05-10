@@ -14,10 +14,13 @@ export class ManipulationTaskComponent implements OnInit {
   @Input() name: string = '';
   @Input() duedate: string = '';
   @Input() isModal: boolean = false;
+  now: string;
 
   constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.now = new Date().toISOString();
+  }
 
   update(task: ITask, name: string, date: string) {
     this.manipulation(task, name, date);

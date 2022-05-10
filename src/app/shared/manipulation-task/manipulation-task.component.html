@@ -27,6 +27,7 @@
           #modalDateEl
           [presentation]="'date'"
           slot="content"
+          [min]="now"
           (ionChange)="duedate = modalDateEl.value"
         ></ion-datetime>
       </ion-accordion>
