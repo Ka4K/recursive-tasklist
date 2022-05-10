@@ -16,35 +16,10 @@
 
 <ion-content [fullscreen]="true">
   <span *ngIf="showform">
-    <form class="ion-padding" (submit)="addTask()" #f="ngForm">
-      <ion-item lines="full" class="ion-padding-bottom">
-        <ion-label position="floating">タスク</ion-label>
-        <ion-input
-          type="text"
-          [(ngModel)]="taskname"
-          name="task"
-          required
-          minlength="3"
-          maxlength="20"
-        ></ion-input>
-      </ion-item>
-      <ion-item [id]="'open-modal'" button="true">
-        <ion-label>締切</ion-label>
-        <ion-item slot="end">
-          <app-show-date date="{{duedate}}"></app-show-date>
-        </ion-item>
-        <ion-modal [trigger]="'open-modal'">
-          <ng-template>
-            <ion-datetime
-              #modalDateEl
-              [presentation]="'date'"
-              (ionChange)="duedate=modalDateEl.value"
-            ></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </ion-item>
-      <ion-button type="submit" [disabled]="!f.form.valid">追加</ion-button>
-    </form>
+    <app-manipulation-task
+      [task]="task"
+      [manipulation]="addTask"
+    ></app-manipulation-task>
   </span>
 
   <ion-button fill="clear" (click)="showform=!showform"

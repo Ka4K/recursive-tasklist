@@ -1,0 +1,38 @@
+<form
+  class="ion-padding"
+  (submit)="update(task, name, duedate); name = ''; duedate = ''"
+  #f="ngForm"
+>
+  <ion-item lines="full" class="ion-padding-bottom">
+    <ion-label position="floating">タスク</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="name"
+      name="task"
+      required
+      minlength="3"
+      maxlength="20"
+    ></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-accordion-group>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-label>締切</ion-label>
+          <ion-item slot="end">
+            <app-show-date date="{{ duedate }}"></app-show-date>
+          </ion-item>
+        </ion-item>
+        <ion-datetime
+          #modalDateEl
+          [presentation]="'date'"
+          slot="content"
+          (ionChange)="duedate = modalDateEl.value"
+        ></ion-datetime>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-item>
+  <ion-button type="submit" [disabled]="!f.form.valid">{{
+    buttonName
+  }}</ion-button>
+</form>

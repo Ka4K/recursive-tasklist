@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ITask } from '../interface/task';
-import { newTask } from '../interface/task';
+import { newTask, addChild } from '../interface/task';
 
 @Component({
   selector: 'app-home',
@@ -28,9 +28,7 @@ export class HomePage {
     ],
   };
   constructor() {}
-  addTask() {
-    this.task.children.push(newTask(this.taskname, this.duedate));
-    this.duedate = '';
-    this.taskname = '';
+  addTask(task: ITask, name: string, date: string) {
+    addChild(task, newTask(name, date));
   }
 }

@@ -1,2 +1,5 @@
 <ion-label>{{ name }}</ion-label>
+<span *ngIf="duedate">
+  <ion-label>締切</ion-label>
+</span>
 <app-show-date [date]="duedate"></app-show-date>

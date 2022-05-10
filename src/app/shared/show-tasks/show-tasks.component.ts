@@ -1,6 +1,11 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ITask, newTask } from 'src/app/interface/task';
-import { ActionSheetController, AlertController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  AlertController,
+  ModalController,
+} from '@ionic/angular';
+import { UpdateTaskModalComponent } from 'src/app/update-task-modal/update-task-modal.component';
 
 @Component({
   selector: 'app-show-tasks',
@@ -12,7 +17,8 @@ export class ShowTasksComponent implements OnInit {
   @Input() change: boolean;
   constructor(
     public actionSheetController: ActionSheetController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public modalCtrl: ModalController
   ) {}
   async changeTask(index: number) {
     const actionSheet = await this.actionSheetController.create({
@@ -81,13 +87,13 @@ export class ShowTasksComponent implements OnInit {
     prompt.present();
   }
   async _renameTask(index: number) {
-    this._createTextPrompt(
-      '変更後のタスク',
-      this.task.children[index].name,
-      (data) => {
-        this.task.children[index].name = data.task;
-      }
-    );
+    const modal = await this.modalCtrl.create({
+      component: UpdateTaskModalComponent,
+      componentProps: {
+        task: this.task.children[index],
+      },
+    });
+    await modal.present();
   }
   async _createChild(index: number) {
     this._createTextPrompt('子タスクの名前', '', (data) => {
