@@ -5,8 +5,7 @@
   <span *ngIf="hasChildren(t)">
     <ion-accordion>
       <ion-item slot="header" [button]="true" (click)="change && changeTask(i)">
-        <ion-label>{{ t.name }}</ion-label>
-        <app-show-date [date]="t.duedate"></app-show-date>
+        <app-task-card [name]="t.name" [duedate]="t.duedate"></app-task-card>
       </ion-item>
       <ion-list slot="content">
         <app-show-tasks [task]="t" [change]="change"> </app-show-tasks>
@@ -15,8 +14,7 @@
   </span>
   <span *ngIf="!hasChildren(t)">
     <ion-item slot="header" [button]="true" (click)="change && changeTask(i)">
-      <ion-label>{{ t.name }}</ion-label>
-      <app-show-date [date]="t.duedate"></app-show-date>
+      <app-task-card [name]="t.name" [duedate]="t.duedate"></app-task-card>
     </ion-item>
   </span>
 </ion-accordion-group>
