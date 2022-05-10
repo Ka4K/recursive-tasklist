@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ITask } from '../interface/task';
-import { newTask, addChild } from '../interface/task';
+import { newTask, addChild, rootTask, loadTasks } from '../interface/task';
 
 @Component({
   selector: 'app-home',
@@ -12,22 +12,11 @@ export class HomePage {
   showform: boolean = true;
   taskname: string;
   duedate: string = '';
-  task: ITask = {
-    name: 'dumy',
-    duedate: '',
-    children: [
-      newTask('1'),
-      {
-        name: '2',
-        duedate: '',
-        children: [
-          { name: '3', duedate: '', children: [] },
-          { name: '4', duedate: '', children: [newTask('5')] },
-        ],
-      },
-    ],
-  };
-  constructor() {}
+  task: ITask;
+  constructor() {
+    loadTasks();
+    this.task = rootTask();
+  }
   addTask(task: ITask, name: string, date: string) {
     addChild(task, newTask(name, date));
   }

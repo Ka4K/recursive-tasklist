@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITask, newTask } from 'src/app/interface/task';
+import { ITask, deleteChild } from 'src/app/interface/task';
 import {
   ActionSheetController,
   AlertController,
@@ -29,7 +29,7 @@ export class ShowTasksComponent implements OnInit {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.task.children.splice(index, 1);
+            deleteChild(this.task, index);
           },
         },
         {
