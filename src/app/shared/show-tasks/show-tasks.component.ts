@@ -25,6 +25,13 @@ export class ShowTasksComponent implements OnInit {
       header: 'タスクの変更',
       buttons: [
         {
+          text: '完了',
+          icon: 'checkbox',
+          handler: () => {
+            deleteChild(this.task, index);
+          },
+        },
+        {
           text: '削除',
           role: 'destructive',
           icon: 'trash',
