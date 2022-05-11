@@ -14,6 +14,7 @@ export class ManipulationTaskComponent implements OnInit {
   @Input() name: string = '';
   @Input() duedate: string = '';
   @Input() isModal: boolean = false;
+  @Input() maxDuedate: string = undefined;
   now: string;
 
   constructor(private modalCtrl: ModalController) {}

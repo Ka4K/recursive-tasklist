@@ -22,8 +22,8 @@
     ></app-manipulation-task>
   </span>
 
-  <ion-button fill="clear" (click)="showform=!showform"
-    ><span *ngIf="showform"><ion-icon name="arrow-up"></ion-icon></span>
+  <ion-button fill="clear" (click)="showform=!showform">
+    <span *ngIf="showform"><ion-icon name="arrow-up"></ion-icon></span>
     <span *ngIf="!showform"><ion-icon name="arrow-down"></ion-icon></span>
   </ion-button>
   <app-show-tasks [task]="task" [change]="changemode"> </app-show-tasks>
