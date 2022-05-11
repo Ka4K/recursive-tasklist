@@ -6,6 +6,7 @@ import {
   monkeyPatchChartJsLegend,
   monkeyPatchChartJsTooltip,
 } from 'ng2-charts';
+import { TaskProgressManagerService } from 'src/app/shared/task-progress-manager.service';
 
 @Component({
   selector: 'app-deadline-pie-chart',
@@ -17,12 +18,16 @@ export class DeadlinePieChartComponent implements OnInit {
     responsive: true,
   };
   public pieChartLabels: Label[] = [['期限内'], ['遅延']];
-  public pieChartData: SingleDataSet = [300, 500];
+  public pieChartData: SingleDataSet;
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor() {
+  constructor(taskManager: TaskProgressManagerService) {
+    this.pieChartData = [
+      taskManager.getCompleteBeforeDuedate(),
+      taskManager.getCompleteAfterDuedate(),
+    ];
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
