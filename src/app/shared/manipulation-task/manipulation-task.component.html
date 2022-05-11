@@ -14,24 +14,29 @@
       maxlength="20"
     ></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-accordion-group>
+  <ng-container>
+    <ion-accordion-group #accordionGroup>
       <ion-accordion>
         <ion-item slot="header">
-          <ion-label>締切</ion-label>
-          <app-show-date date="{{ duedate }}"></app-show-date>
+          <ion-label>締切 </ion-label>
+          <ion-text slot="end">
+            <app-show-date date="{{ duedate }}"></app-show-date>
+          </ion-text>
         </ion-item>
         <ion-datetime
           #modalDateEl
           [presentation]="'date'"
           slot="content"
+          size="cover"
           [min]="now"
           [max]="maxDuedate"
-          (ionChange)="duedate = modalDateEl.value"
+          (ionChange)="
+            duedate = modalDateEl.value; accordionGroup.value = undefined
+          "
         ></ion-datetime>
       </ion-accordion>
     </ion-accordion-group>
-  </ion-item>
+  </ng-container>
   <ion-button type="submit" [disabled]="!f.form.valid">{{
     buttonName
   }}</ion-button>
