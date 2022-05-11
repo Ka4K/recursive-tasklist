@@ -7,6 +7,7 @@ import {
 } from '@ionic/angular';
 import { UpdateTaskModalComponent } from 'src/app/update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from 'src/app/make-child-modal/make-child-modal.component';
+import { TaskProgressManagerService } from '../task-progress-manager.service';
 @Component({
   selector: 'app-show-tasks',
   templateUrl: './show-tasks.component.html',
@@ -18,7 +19,8 @@ export class ShowTasksComponent implements OnInit {
   constructor(
     public actionSheetController: ActionSheetController,
     public alertController: AlertController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public taskManager: TaskProgressManagerService
   ) {}
   async changeTask(index: number) {
     const actionSheet = await this.actionSheetController.create({
@@ -28,6 +30,9 @@ export class ShowTasksComponent implements OnInit {
           text: '完了',
           icon: 'checkbox',
           handler: () => {
+            this.taskManager.increseComplete(this.task.children[index].duedate);
+            console.log(this.taskManager.getCompleteBeforeDuedate());
+            console.log(this.taskManager.getCompleteAfterDuedate());
             deleteChild(this.task, index);
           },
         },
