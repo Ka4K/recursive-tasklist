@@ -31,8 +31,6 @@ export class ShowTasksComponent implements OnInit {
           icon: 'checkbox',
           handler: () => {
             this.taskManager.increseComplete(this.task.children[index].duedate);
-            console.log(this.taskManager.getCompleteBeforeDuedate());
-            console.log(this.taskManager.getCompleteAfterDuedate());
             deleteChild(this.task, index);
           },
         },
