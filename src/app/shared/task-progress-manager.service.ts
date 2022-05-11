@@ -13,6 +13,7 @@ export class TaskProgressManagerService {
     } else {
       _completeAfterDuedate++;
     }
+    this.updateLocalstorage();
   }
   getCompleteBeforeDuedate(): number {
     return _completeBeforeDuedate;
@@ -25,5 +26,17 @@ export class TaskProgressManagerService {
   }
   private compareDate(a: string, b: string): boolean {
     return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
+  }
+  private updateLocalstorage() {
+    localStorage.completeBeforeDuedate = String(_completeBeforeDuedate);
+    localStorage.completeAfterDuedate = String(_completeAfterDuedate);
+  }
+  loadLocalStorage() {
+    if ('completeBeforeDuedate' in localStorage) {
+      _completeBeforeDuedate = Number(localStorage.completeBeforeDuedate);
+    }
+    if ('completeAfterDuedate' in localStorage) {
+      _completeAfterDuedate = Number(localStorage.completeAfterDuedate);
+    }
   }
 }

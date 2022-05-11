@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ITask } from '../interface/task';
-import { newTask, addChild, rootTask, loadTasks } from '../interface/task';
+import { newTask, addChild, rootTask } from '../interface/task';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,6 @@ export class HomePage {
   duedate: string = '';
   task: ITask;
   constructor() {
-    loadTasks();
     this.task = rootTask();
   }
   addTask(task: ITask, name: string, date: string) {
