@@ -7,7 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShowDateComponent implements OnInit {
   @Input() date: string;
+  @Input() highlight: boolean = false;
   constructor() {}
 
   ngOnInit() {}
+  dueDateIsToday() {
+    return this.date.slice(0, 10) == new Date().toISOString().slice(0, 10);
+  }
 }

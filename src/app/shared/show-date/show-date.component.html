@@ -1,3 +1,10 @@
 <span *ngIf="date">
-  {{ date | date: "yyyy-MM-dd" }}
+  <span *ngIf="highlight && dueDateIsToday()">
+    <font color="#ff0000">
+      {{ date | date: "yyyy-MM-dd" }}
+    </font>
+  </span>
+  <span *ngIf="!(highlight && dueDateIsToday())">
+    {{ date | date: "yyyy-MM-dd" }}
+  </span>
 </span>

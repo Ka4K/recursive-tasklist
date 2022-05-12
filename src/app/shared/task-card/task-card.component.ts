@@ -8,6 +8,7 @@ import { ITask } from 'src/app/interface/task';
 })
 export class TaskCardComponent implements OnInit {
   @Input() task: ITask;
+  @Input() highlight: boolean = false;
   constructor() {}
 
   ngOnInit() {}
