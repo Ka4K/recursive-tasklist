@@ -31,3 +31,7 @@ export function deleteChild(parent: ITask, idx: number) {
   parent.children.splice(idx, 1);
   _updateLocalstorage();
 }
+export function clearTasks() {
+  _root.children = [];
+  _updateLocalstorage();
+}

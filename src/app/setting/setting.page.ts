@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { clearTasks } from '../interface/task';
 
 @Component({
   selector: 'app-setting',
@@ -9,4 +10,7 @@ export class SettingPage implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+  clearTasks() {
+    clearTasks();
+  }
 }
