@@ -11,6 +11,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Statistics', url: '/statistics', icon: 'flask' },
+    { title: 'TaskList', url: '/tasks', icon: 'list' },
     { title: 'Setting', url: '/setting', icon: 'options' },
   ];
   constructor(taskManager: TaskProgressManagerService) {

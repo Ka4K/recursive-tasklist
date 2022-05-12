@@ -14,11 +14,20 @@ const routes: Routes = [
   },
   {
     path: 'statistics',
-    loadChildren: () => import('./statistics/statistics.module').then( m => m.StatisticsPageModule)
+    loadChildren: () =>
+      import('./statistics/statistics.module').then(
+        (m) => m.StatisticsPageModule
+      ),
   },
   {
     path: 'setting',
-    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
+    loadChildren: () =>
+      import('./setting/setting.module').then((m) => m.SettingPageModule),
+  },
+  {
+    path: 'tasks',
+    loadChildren: () =>
+      import('./task-list/task-list.module').then((m) => m.TaskListPageModule),
   },
 ];
 
