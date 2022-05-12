@@ -1,4 +1,6 @@
-<ion-label>{{ name }}</ion-label>
-<span *ngIf="duedate">
-  <ion-label>締切 : <app-show-date [date]="duedate"></app-show-date></ion-label>
+<ion-label>{{ task.name }}</ion-label>
+<span *ngIf="task.duedate">
+  <ion-label
+    >締切 : <app-show-date [date]="task.duedate"></app-show-date
+  ></ion-label>
 </span>
