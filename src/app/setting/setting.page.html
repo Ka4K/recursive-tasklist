@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-item [button]="true"> タスク完了数の初期化 </ion-item>
+  <ion-item [button]="true" (click)="clearCompleted()">
+    タスク完了数の初期化
+  </ion-item>
   <ion-item [button]="true" (click)="clearTasks()"> タスクのクリア </ion-item>
 </ion-content>

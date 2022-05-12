@@ -39,4 +39,9 @@ export class TaskProgressManagerService {
       _completeAfterDuedate = Number(localStorage.completeAfterDuedate);
     }
   }
+  clearCompleted() {
+    _completeBeforeDuedate = 0;
+    _completeAfterDuedate = 0;
+    this.updateLocalstorage();
+  }
 }
