@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { clearTasks } from '../interface/task';
 import { TaskProgressManagerService } from '../shared/task-progress-manager.service';
 
@@ -8,13 +9,31 @@ import { TaskProgressManagerService } from '../shared/task-progress-manager.serv
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
-  constructor(public taskManager: TaskProgressManagerService) {}
+  constructor(
+    public taskManager: TaskProgressManagerService,
+    public alertController: AlertController
+  ) {}
 
-  ngOnInit() {}
-  clearTasks() {
-    clearTasks();
+  ngOnInit(): void {}
+  async makeAlert(handler: (any) => boolean | void) {
+    const prompt = await this.alertController.create({
+      header: 'この操作は元に戻せません。よろしいですか？',
+      buttons: [
+        {
+          text: 'いいえ',
+        },
+        {
+          text: 'はい',
+          handler: handler,
+        },
+      ],
+    });
+    prompt.present();
   }
-  clearCompleted() {
-    this.taskManager.clearCompleted();
+  async clearTasks() {
+    this.makeAlert(clearTasks);
+  }
+  async clearCompleted() {
+    this.makeAlert(this.taskManager.clearCompleted);
   }
 }
