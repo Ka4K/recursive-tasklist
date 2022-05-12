@@ -8,10 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let t of tasks">
-      <app-task-card [task]="t"></app-task-card>
-      <ion-text slot="end"> {{t.path}} </ion-text>
-    </ion-item>
-  </ion-list>
+  <ion-accordion-group *ngFor="let t of tasks">
+    <span *ngIf="t.path">
+      <ion-accordion>
+        <ion-item slot="header" lines="full">
+          <app-task-card [task]="t"></app-task-card>
+        </ion-item>
+        <ion-item slot="content"> {{t.path}} </ion-item>
+      </ion-accordion>
+    </span>
+    <span *ngIf="!t.path">
+      <ion-item lines="full">
+        <app-task-card [task]="t"></app-task-card>
+      </ion-item>
+    </span>
+  </ion-accordion-group>
 </ion-content>
