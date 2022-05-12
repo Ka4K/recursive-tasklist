@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { ITask } from '../interface/task';
 import { newTask, addChild, rootTask } from '../interface/task';
+import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -13,10 +15,16 @@ export class HomePage {
   taskname: string;
   duedate: string = '';
   task: ITask;
-  constructor() {
+  constructor(public modalCtrl: ModalController) {
     this.task = rootTask();
   }
-  addTask(task: ITask, name: string, date: string) {
-    addChild(task, newTask(name, date));
+  async addTask() {
+    const modal = await this.modalCtrl.create({
+      component: MakeChildModalComponent,
+      componentProps: {
+        parent: this.task,
+      },
+    });
+    await modal.present();
   }
 }

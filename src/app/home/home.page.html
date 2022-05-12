@@ -8,16 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <span *ngIf="showform">
-    <app-manipulation-task
-      [task]="task"
-      [manipulation]="addTask"
-    ></app-manipulation-task>
-  </span>
-
-  <ion-button fill="clear" (click)="showform=!showform">
-    <span *ngIf="showform"><ion-icon name="arrow-up"></ion-icon></span>
-    <span *ngIf="!showform"><ion-icon name="arrow-down"></ion-icon></span>
-  </ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addTask()"
+      ><ion-icon name="add"></ion-icon
+    ></ion-fab-button>
+  </ion-fab>
   <app-show-tasks [task]="task"> </app-show-tasks>
 </ion-content>
