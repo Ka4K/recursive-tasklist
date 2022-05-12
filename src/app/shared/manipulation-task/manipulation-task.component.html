@@ -37,7 +37,10 @@
       </ion-accordion>
     </ion-accordion-group>
   </ng-container>
-  <ion-button type="submit" [disabled]="!f.form.valid">{{
-    buttonName
-  }}</ion-button>
+  <ion-item lines="none">
+    <ion-button type="submit" [disabled]="!f.form.valid">{{
+      buttonName
+    }}</ion-button>
+    <ion-button (click)="cancel()">キャンセル </ion-button>
+  </ion-item>
 </form>

@@ -29,4 +29,9 @@ export class ManipulationTaskComponent implements OnInit {
       this.modalCtrl.dismiss();
     }
   }
+  cancel() {
+    if (this.isModal) {
+      this.modalCtrl.dismiss();
+    }
+  }
 }
