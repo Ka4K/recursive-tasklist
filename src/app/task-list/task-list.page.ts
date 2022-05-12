@@ -17,6 +17,9 @@ export class TaskListPage implements OnInit {
       this.tasks.push(t);
       this.pushChild(t);
     });
+    this.tasks.sort((a: ITask, b: ITask) => {
+      return a.duedate > b.duedate ? 1 : -1;
+    });
   }
   ionViewWillEnter() {
     let root = rootTask();
