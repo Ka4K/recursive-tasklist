@@ -15,14 +15,15 @@ import { TaskProgressManagerService } from '../task-progress-manager.service';
 })
 export class ShowTasksComponent implements OnInit {
   @Input() task: ITask;
-  @Input() change: boolean;
   constructor(
     public actionSheetController: ActionSheetController,
     public alertController: AlertController,
     public modalCtrl: ModalController,
     public taskManager: TaskProgressManagerService
   ) {}
-  async changeTask(index: number) {
+  async changeTask(index: number, $event) {
+    $event.stopPropagation();
+    $event.preventDefault();
     const actionSheet = await this.actionSheetController.create({
       header: 'タスクの変更',
       buttons: [

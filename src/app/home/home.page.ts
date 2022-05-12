@@ -8,7 +8,6 @@ import { newTask, addChild, rootTask } from '../interface/task';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  changemode: boolean = false;
   showform: boolean = true;
   taskname: string;
   duedate: string = '';

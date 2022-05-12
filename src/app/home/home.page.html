@@ -4,16 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title> ホーム </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="changemode=!changemode">
-        <span *ngIf="!changemode">
-          <ion-icon name="pencil"></ion-icon>
-        </span>
-        <span *ngIf="changemode">
-          <ion-icon name="eye"></ion-icon>
-        </span>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -29,5 +19,5 @@
     <span *ngIf="showform"><ion-icon name="arrow-up"></ion-icon></span>
     <span *ngIf="!showform"><ion-icon name="arrow-down"></ion-icon></span>
   </ion-button>
-  <app-show-tasks [task]="task" [change]="changemode"> </app-show-tasks>
+  <app-show-tasks [task]="task"> </app-show-tasks>
 </ion-content>

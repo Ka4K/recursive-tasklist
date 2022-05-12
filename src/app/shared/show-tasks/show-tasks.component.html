@@ -1,20 +1,23 @@
-<ion-accordion-group
-  *ngFor="let t of task.children; let i = index"
-  [disabled]="change"
->
+<ion-accordion-group *ngFor="let t of task.children; let i = index">
   <span *ngIf="hasChildren(t)">
     <ion-accordion>
-      <ion-item slot="header" [button]="true" (click)="change && changeTask(i)">
+      <ion-item slot="header">
         <app-task-card [name]="t.name" [duedate]="t.duedate"></app-task-card>
+        <ion-button (click)="changeTask(i, $event)" slot="end">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-list slot="content">
-        <app-show-tasks [task]="t" [change]="change"> </app-show-tasks>
+        <app-show-tasks [task]="t"> </app-show-tasks>
       </ion-list>
     </ion-accordion>
   </span>
   <span *ngIf="!hasChildren(t)">
-    <ion-item slot="header" [button]="true" (click)="change && changeTask(i)">
+    <ion-item slot="header">
       <app-task-card [name]="t.name" [duedate]="t.duedate"></app-task-card>
+      <ion-button (click)="changeTask(i, $event)" slot="end">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-button>
     </ion-item>
   </span>
 </ion-accordion-group>
