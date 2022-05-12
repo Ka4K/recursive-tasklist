@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TaskListPageRoutingModule } from './task-list-routing.module';
 
 import { TaskListPage } from './task-list.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TaskListPageRoutingModule
+    TaskListPageRoutingModule,
+    SharedModule,
   ],
-  declarations: [TaskListPage]
+  declarations: [TaskListPage],
 })
 export class TaskListPageModule {}

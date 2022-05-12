@@ -6,15 +6,16 @@ import { ManipulationTaskComponent } from './manipulation-task/manipulation-task
 import { FormsModule } from '@angular/forms';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.component';
-
+import { TaskCardComponent } from '../shared/task-card/task-card.component';
 @NgModule({
   declarations: [
     ShowDateComponent,
     ManipulationTaskComponent,
     UpdateTaskModalComponent,
     MakeChildModalComponent,
+    TaskCardComponent,
   ],
-  exports: [ShowDateComponent, ManipulationTaskComponent],
+  exports: [ShowDateComponent, ManipulationTaskComponent, TaskCardComponent],
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class SharedModule {}

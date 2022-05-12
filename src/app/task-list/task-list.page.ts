@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ITask } from '../interface/task';
+import { rootTask } from '../interface/task';
 
 @Component({
   selector: 'app-task-list',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-list.page.scss'],
 })
 export class TaskListPage implements OnInit {
+  tasks: ITask[] = [];
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  private pushChild(parent: ITask) {
+    parent.children.map((t) => {
+      this.tasks.push(t);
+      this.pushChild(t);
+    });
   }
-
+  ionViewWillEnter() {
+    let root = rootTask();
+    this.pushChild(root);
+  }
 }

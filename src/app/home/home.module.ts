@@ -7,7 +7,6 @@ import { ShowTasksComponent } from '../shared/show-tasks/show-tasks.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { TaskCardComponent } from '../shared/task-card/task-card.component';
 
 @NgModule({
   imports: [
@@ -17,6 +16,6 @@ import { TaskCardComponent } from '../shared/task-card/task-card.component';
     HomePageRoutingModule,
     SharedModule,
   ],
-  declarations: [HomePage, ShowTasksComponent, TaskCardComponent],
+  declarations: [HomePage, ShowTasksComponent],
 })
 export class HomePageModule {}
