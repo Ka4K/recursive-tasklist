@@ -8,12 +8,14 @@ let _completeAfterDuedate = 0;
 export class TaskProgressManagerService {
   constructor() {}
   increseComplete(duedate: string) {
-    if (this.compareDate(duedate, new Date().toISOString())) {
-      _completeBeforeDuedate++;
-    } else {
-      _completeAfterDuedate++;
+    if (duedate) {
+      if (this.compareDate(duedate, new Date().toISOString())) {
+        _completeBeforeDuedate++;
+      } else {
+        _completeAfterDuedate++;
+      }
+      this.updateLocalstorage();
     }
-    this.updateLocalstorage();
   }
   getCompleteBeforeDuedate(): number {
     return _completeBeforeDuedate;
