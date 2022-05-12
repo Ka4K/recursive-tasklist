@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ITask, deleteChild } from 'src/app/interface/task';
 import {
   ActionSheetController,
   AlertController,
   ModalController,
+  IonAccordionGroup,
 } from '@ionic/angular';
 import { UpdateTaskModalComponent } from 'src/app/update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from 'src/app/make-child-modal/make-child-modal.component';
@@ -15,6 +16,8 @@ import { TaskProgressManagerService } from '../task-progress-manager.service';
 })
 export class ShowTasksComponent implements OnInit {
   @Input() task: ITask;
+  @ViewChild(IonAccordionGroup, { static: true })
+  accordionGroup: IonAccordionGroup;
   constructor(
     public actionSheetController: ActionSheetController,
     public alertController: AlertController,
