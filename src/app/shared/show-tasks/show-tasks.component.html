@@ -3,19 +3,16 @@
   #accordionGroup
 >
   <span *ngIf="hasChildren(t)">
-    <ion-accordion value="String(i)">
+    <ion-accordion>
       <ion-item slot="header">
         <app-task-card
           [task]="t"
           [highlight]="true"
+          [edit]="true"
+          [parent]="task"
+          [index]="i"
           [showRecent]="true"
         ></app-task-card>
-        <ion-button
-          (click)="changeTask(i, $event); accordionGroup.value = 'String(i)'"
-          slot="end"
-        >
-          <ion-icon name="pencil"></ion-icon>
-        </ion-button>
       </ion-item>
       <ion-list slot="content">
         <app-show-tasks [task]="t"> </app-show-tasks>
@@ -24,10 +21,13 @@
   </span>
   <span *ngIf="!hasChildren(t)">
     <ion-item slot="header">
-      <app-task-card [task]="t" [highlight]="true"></app-task-card>
-      <ion-button (click)="changeTask(i, $event)" slot="end">
-        <ion-icon name="pencil"></ion-icon>
-      </ion-button>
+      <app-task-card
+        [task]="t"
+        [highlight]="true"
+        [edit]="true"
+        [parent]="task"
+        [index]="i"
+      ></app-task-card>
     </ion-item>
   </span>
 </ion-accordion-group>

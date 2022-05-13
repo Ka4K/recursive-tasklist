@@ -14,3 +14,8 @@
     ></app-show-date
   ></ion-label>
 </span>
+<span *ngIf="edit">
+  <ion-button (click)="changeTask($event)" slot="end">
+    <ion-icon name="pencil"></ion-icon>
+  </ion-button>
+</span>
