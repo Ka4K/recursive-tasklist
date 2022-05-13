@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { UpdateTaskModalComponent } from '../update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.component';
 import { TaskCardComponent } from '../shared/task-card/task-card.component';
+import { ShowTaskBodyComponent } from './show-tasks/show-task-body/show-task-body.component';
+import { ShowTasksComponent } from './show-tasks/show-tasks.component';
 @NgModule({
   declarations: [
     ShowDateComponent,
@@ -14,8 +16,16 @@ import { TaskCardComponent } from '../shared/task-card/task-card.component';
     UpdateTaskModalComponent,
     MakeChildModalComponent,
     TaskCardComponent,
+    ShowTaskBodyComponent,
+    ShowTasksComponent,
   ],
-  exports: [ShowDateComponent, ManipulationTaskComponent, TaskCardComponent],
+  exports: [
+    ShowDateComponent,
+    ManipulationTaskComponent,
+    TaskCardComponent,
+    ShowTaskBodyComponent,
+    ShowTasksComponent,
+  ],
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class SharedModule {}

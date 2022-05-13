@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { ShowTasksComponent } from '../shared/show-tasks/show-tasks.component';
 import { SharedModule } from '../shared/shared.module';
 
 import { HomePageRoutingModule } from './home-routing.module';
@@ -16,6 +15,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     HomePageRoutingModule,
     SharedModule,
   ],
-  declarations: [HomePage, ShowTasksComponent],
+  declarations: [HomePage],
 })
 export class HomePageModule {}

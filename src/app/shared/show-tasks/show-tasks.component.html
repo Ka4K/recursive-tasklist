@@ -2,32 +2,9 @@
   *ngFor="let t of task.children; let i = index"
   #accordionGroup
 >
-  <span *ngIf="hasChildren(t)">
-    <ion-accordion>
-      <ion-item slot="header">
-        <app-task-card
-          [task]="t"
-          [highlight]="true"
-          [edit]="true"
-          [parent]="task"
-          [index]="i"
-          [showRecent]="true"
-        ></app-task-card>
-      </ion-item>
-      <ion-list slot="content">
-        <app-show-tasks [task]="t"> </app-show-tasks>
-      </ion-list>
-    </ion-accordion>
-  </span>
-  <span *ngIf="!hasChildren(t)">
-    <ion-item slot="header">
-      <app-task-card
-        [task]="t"
-        [highlight]="true"
-        [edit]="true"
-        [parent]="task"
-        [index]="i"
-      ></app-task-card>
-    </ion-item>
-  </span>
+  <app-show-task-body
+    [index]="i"
+    [parent]="task"
+    [task]="t"
+  ></app-show-task-body>
 </ion-accordion-group>
