@@ -17,5 +17,6 @@
       ><ion-icon name="add"></ion-icon
     ></ion-fab-button>
   </ion-fab>
-  <app-show-tasks [task]="sort?sortTasks(task):task"> </app-show-tasks>
+  <app-show-tasks [task]="sort?sortTasks(task):task" [virtualScroll]="true">
+  </app-show-tasks>
 </ion-content>

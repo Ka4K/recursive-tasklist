@@ -9,6 +9,7 @@ import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.co
 import { TaskCardComponent } from '../shared/task-card/task-card.component';
 import { ShowTaskBodyComponent } from './show-tasks/show-task-body/show-task-body.component';
 import { ShowTasksComponent } from './show-tasks/show-tasks.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     ShowDateComponent,
@@ -26,6 +27,6 @@ import { ShowTasksComponent } from './show-tasks/show-tasks.component';
     ShowTaskBodyComponent,
     ShowTasksComponent,
   ],
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, ScrollingModule],
 })
 export class SharedModule {}
