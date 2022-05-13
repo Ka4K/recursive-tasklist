@@ -12,14 +12,14 @@
     <span *ngIf="t.path">
       <ion-accordion>
         <ion-item slot="header" lines="full">
-          <app-task-card [task]="t"></app-task-card>
+          <app-task-card [task]="t" [highlight]="true"></app-task-card>
         </ion-item>
         <ion-item slot="content"> {{t.path}} </ion-item>
       </ion-accordion>
     </span>
     <span *ngIf="!t.path">
       <ion-item lines="full">
-        <app-task-card [task]="t"></app-task-card>
+        <app-task-card [task]="t" [highlight]="true"></app-task-card>
       </ion-item>
     </span>
   </ion-accordion-group>
