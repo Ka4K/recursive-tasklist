@@ -5,7 +5,11 @@
   <span *ngIf="hasChildren(t)">
     <ion-accordion value="String(i)">
       <ion-item slot="header">
-        <app-task-card [task]="t" [highlight]="true"></app-task-card>
+        <app-task-card
+          [task]="t"
+          [highlight]="true"
+          [showRecent]="true"
+        ></app-task-card>
         <ion-button
           (click)="changeTask(i, $event); accordionGroup.value = 'String(i)'"
           slot="end"

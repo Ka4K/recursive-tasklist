@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { addChild, ITask, newTask } from '../interface/task';
+import { addChildFromName, ITask } from '../interface/task';
 
 @Component({
   selector: 'app-make-child-modal',
@@ -15,6 +15,6 @@ export class MakeChildModalComponent implements OnInit {
     this.task = this.navParams.data.parent;
   }
   addTask(task: ITask, name: string, date: string) {
-    addChild(task, newTask(name, date));
+    addChildFromName(task, name, date);
   }
 }
