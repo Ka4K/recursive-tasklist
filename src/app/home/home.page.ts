@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ITask } from '../interface/task';
-import { newTask, addChild, rootTask } from '../interface/task';
+import { rootTask, cloneTask, sortTask } from '../interface/task';
 import { MakeChildModalComponent } from '../make-child-modal/make-child-modal.component';
 
 @Component({
@@ -15,6 +15,7 @@ export class HomePage {
   taskname: string;
   duedate: string = '';
   task: ITask;
+  sort: boolean = false;
   constructor(public modalCtrl: ModalController) {
     this.task = rootTask();
   }
@@ -26,5 +27,9 @@ export class HomePage {
       },
     });
     await modal.present();
+  }
+
+  sortTasks(task: ITask) {
+    return sortTask(cloneTask(task));
   }
 }
