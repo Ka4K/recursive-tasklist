@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  ActionSheetController,
-  AlertController,
-  ModalController,
-} from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ITask, deleteChild } from 'src/app/interface/task';
 import { TaskProgressService } from '../task-progress.service';
 import { UpdateTaskModalComponent } from 'src/app/shared/update-task-modal/update-task-modal.component';
@@ -22,10 +18,9 @@ export class TaskCardComponent implements OnInit {
   @Input() index: number | undefined;
 
   constructor(
-    public actionSheetController: ActionSheetController,
-    public alertController: AlertController,
-    public modalCtrl: ModalController,
-    public taskManager: TaskProgressService
+    private actionSheetController: ActionSheetController,
+    private modalCtrl: ModalController,
+    private taskManager: TaskProgressService
   ) {}
   async changeTask($event) {
     $event.stopPropagation();
@@ -77,7 +72,7 @@ export class TaskCardComponent implements OnInit {
   hasChildren(t: ITask) {
     return t.children.length;
   }
-  async _renameTask() {
+  private async _renameTask() {
     const modal = await this.modalCtrl.create({
       component: UpdateTaskModalComponent,
       componentProps: {
@@ -86,7 +81,7 @@ export class TaskCardComponent implements OnInit {
     });
     await modal.present();
   }
-  async _createChild() {
+  private async _createChild() {
     const modal = await this.modalCtrl.create({
       component: MakeChildModalComponent,
       componentProps: {

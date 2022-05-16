@@ -23,7 +23,7 @@ export class DeadlinePieChartComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor(taskManager: TaskProgressService) {
+  constructor(private taskManager: TaskProgressService) {
     this.pieChartData = [
       taskManager.getCompleteBeforeDuedate(),
       taskManager.getCompleteAfterDuedate(),

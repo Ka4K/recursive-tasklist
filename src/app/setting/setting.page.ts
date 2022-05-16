@@ -10,12 +10,12 @@ import { TaskProgressService } from '../shared/task-progress.service';
 })
 export class SettingPage implements OnInit {
   constructor(
-    public taskManager: TaskProgressService,
-    public alertController: AlertController
+    private taskManager: TaskProgressService,
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {}
-  async makeAlert(handler: (any) => boolean | void) {
+  private async makeAlert(handler: (any) => boolean | void): Promise<void> {
     const prompt = await this.alertController.create({
       header: 'この操作は元に戻せません。よろしいですか？',
       buttons: [
@@ -30,10 +30,10 @@ export class SettingPage implements OnInit {
     });
     prompt.present();
   }
-  async clearTasks() {
+  async clearTasks(): Promise<void> {
     this.makeAlert(clearTasks);
   }
-  async clearCompleted() {
+  async clearCompleted(): Promise<void> {
     this.makeAlert(this.taskManager.clearCompleted);
   }
 }
