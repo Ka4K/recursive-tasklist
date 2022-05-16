@@ -8,7 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <cdk-virtual-scroll-viewport [itemSize]="20" class="example-viewport">
+  <cdk-virtual-scroll-viewport
+    [itemSize]="20"
+    class="example-viewport"
+    [minBufferPx]="200"
+    [maxBufferPx]="500"
+  >
     <ion-accordion-group *cdkVirtualFor="let t of tasks">
       <span *ngIf="t.path">
         <ion-accordion>

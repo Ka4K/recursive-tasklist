@@ -81,7 +81,7 @@ export function updateTask(task: ITask, name: string, duedate: string = '') {
   _updateLocalstorage();
 }
 export function addChild(parent: ITask, child: ITask) {
-  parent.children.push(child);
+  parent.children = [...parent.children, child];
   _updateRecentAtCreate(child);
   _updateLocalstorage();
 }
@@ -93,7 +93,9 @@ export function addChildFromName(
   addChild(parent, newTask(name, parent, duedate));
 }
 export function deleteChild(parent: ITask, idx: number) {
+  let beforeDuedate = parent.recentDuedate;
   parent.children.splice(idx, 1);
+  _updateRecentAtDelete(parent, beforeDuedate);
   _updateLocalstorage();
 }
 export function clearTasks() {
