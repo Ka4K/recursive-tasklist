@@ -19,12 +19,12 @@ export class TaskListPage implements OnInit {
       this.tasks.push(t);
       this.pushChild(task, path + '/' + task.name);
     });
-    this.tasks.sort((a: TaskWithPath, b: TaskWithPath) => {
-      return a.duedate > b.duedate ? 1 : -1;
-    });
   }
   ionViewWillEnter() {
     let root = rootTask();
     this.pushChild(root, '');
+    this.tasks.sort((a: TaskWithPath, b: TaskWithPath) => {
+      return a.duedate > b.duedate ? 1 : -1;
+    });
   }
 }
