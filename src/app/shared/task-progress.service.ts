@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 
-let _completeBeforeDuedate = 0;
-let _completeAfterDuedate = 0;
 @Injectable({
   providedIn: 'root',
 })
-export class TaskProgressManagerService {
+export class TaskProgressService {
+  completeBeforeDuedate: number = 0;
+  completeAfterDuedate: number = 0;
   constructor() {}
   increseComplete(duedate: string) {
     if (duedate) {
       if (this.compareDate(duedate, new Date().toISOString())) {
-        _completeBeforeDuedate++;
+        this.completeBeforeDuedate++;
       } else {
-        _completeAfterDuedate++;
+        this.completeAfterDuedate++;
       }
       this.updateLocalstorage();
     }
   }
   getCompleteBeforeDuedate(): number {
-    return _completeBeforeDuedate;
+    return this.completeBeforeDuedate;
   }
   getCompleteAfterDuedate(): number {
-    return _completeAfterDuedate;
+    return this.completeAfterDuedate;
   }
   private getYYYYMMDD(date: string): string {
     return date.slice(0, 10);
@@ -30,20 +30,20 @@ export class TaskProgressManagerService {
     return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
   }
   private updateLocalstorage() {
-    localStorage.completeBeforeDuedate = String(_completeBeforeDuedate);
-    localStorage.completeAfterDuedate = String(_completeAfterDuedate);
+    localStorage.completeBeforeDuedate = String(this.completeBeforeDuedate);
+    localStorage.completeAfterDuedate = String(this.completeAfterDuedate);
   }
   loadLocalStorage() {
     if ('completeBeforeDuedate' in localStorage) {
-      _completeBeforeDuedate = Number(localStorage.completeBeforeDuedate);
+      this.completeBeforeDuedate = Number(localStorage.completeBeforeDuedate);
     }
     if ('completeAfterDuedate' in localStorage) {
-      _completeAfterDuedate = Number(localStorage.completeAfterDuedate);
+      this.completeAfterDuedate = Number(localStorage.completeAfterDuedate);
     }
   }
   clearCompleted() {
-    _completeBeforeDuedate = 0;
-    _completeAfterDuedate = 0;
+    this.completeBeforeDuedate = 0;
+    this.completeAfterDuedate = 0;
     this.updateLocalstorage();
   }
 }

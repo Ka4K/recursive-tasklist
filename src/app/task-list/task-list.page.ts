@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ITask } from '../interface/task';
 import { rootTask } from '../interface/task';
 
-type TaskWithPath = ITask & { path: string };
+interface TaskWithPath extends ITask {
+  path: string;
+}
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.page.html',

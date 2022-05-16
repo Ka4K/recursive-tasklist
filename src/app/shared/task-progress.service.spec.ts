@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TaskProgressManagerService } from './task-progress-manager.service';
+import { TaskProgressService } from './task-progress.service';
 
 describe('TaskProgressManagerService', () => {
-  let service: TaskProgressManagerService;
+  let service: TaskProgressService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TaskProgressManagerService);
+    service = TestBed.inject(TaskProgressService);
   });
 
   it('should be created', () => {

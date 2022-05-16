@@ -5,7 +5,7 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { ITask, deleteChild } from 'src/app/interface/task';
-import { TaskProgressManagerService } from '../task-progress-manager.service';
+import { TaskProgressService } from '../task-progress.service';
 import { UpdateTaskModalComponent } from 'src/app/shared/update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from 'src/app/shared/make-child-modal/make-child-modal.component';
 @Component({
@@ -25,7 +25,7 @@ export class TaskCardComponent implements OnInit {
     public actionSheetController: ActionSheetController,
     public alertController: AlertController,
     public modalCtrl: ModalController,
-    public taskManager: TaskProgressManagerService
+    public taskManager: TaskProgressService
   ) {}
   async changeTask($event) {
     $event.stopPropagation();

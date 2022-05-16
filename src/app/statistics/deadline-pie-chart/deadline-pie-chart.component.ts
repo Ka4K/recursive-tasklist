@@ -6,7 +6,7 @@ import {
   monkeyPatchChartJsLegend,
   monkeyPatchChartJsTooltip,
 } from 'ng2-charts';
-import { TaskProgressManagerService } from 'src/app/shared/task-progress-manager.service';
+import { TaskProgressService } from 'src/app/shared/task-progress.service';
 
 @Component({
   selector: 'app-deadline-pie-chart',
@@ -23,7 +23,7 @@ export class DeadlinePieChartComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor(taskManager: TaskProgressManagerService) {
+  constructor(taskManager: TaskProgressService) {
     this.pieChartData = [
       taskManager.getCompleteBeforeDuedate(),
       taskManager.getCompleteAfterDuedate(),

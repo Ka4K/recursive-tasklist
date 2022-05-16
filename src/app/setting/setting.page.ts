@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { clearTasks } from '../interface/task';
-import { TaskProgressManagerService } from '../shared/task-progress-manager.service';
+import { TaskProgressService } from '../shared/task-progress.service';
 
 @Component({
   selector: 'app-setting',
@@ -10,7 +10,7 @@ import { TaskProgressManagerService } from '../shared/task-progress-manager.serv
 })
 export class SettingPage implements OnInit {
   constructor(
-    public taskManager: TaskProgressManagerService,
+    public taskManager: TaskProgressService,
     public alertController: AlertController
   ) {}
 
