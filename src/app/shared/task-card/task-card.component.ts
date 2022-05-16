@@ -6,8 +6,8 @@ import {
 } from '@ionic/angular';
 import { ITask, deleteChild } from 'src/app/interface/task';
 import { TaskProgressManagerService } from '../task-progress-manager.service';
-import { UpdateTaskModalComponent } from 'src/app/update-task-modal/update-task-modal.component';
-import { MakeChildModalComponent } from 'src/app/make-child-modal/make-child-modal.component';
+import { UpdateTaskModalComponent } from 'src/app/shared/update-task-modal/update-task-modal.component';
+import { MakeChildModalComponent } from 'src/app/shared/make-child-modal/make-child-modal.component';
 @Component({
   selector: 'app-task-card',
   templateUrl: './task-card.component.html',

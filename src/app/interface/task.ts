@@ -32,16 +32,25 @@ function _setParent(task: ITask) {
     }
   });
 }
-function _updateRecent(task: ITask) {
+function _updateRecentAtCreate(task: ITask) {
   if (
-    task.parent == null ||
-    task.recentDuedate > task.parent.recentDuedate ||
-    !task.recentDuedate
+    !task.parent ||
+    (task.recentDuedate > task.parent.recentDuedate && !task.recentDuedate)
   ) {
     return;
   }
   task.parent.recentDuedate = task.recentDuedate;
-  _updateRecent(task.parent);
+  _updateRecentAtCreate(task.parent);
+}
+function _updateRecentAtDelete(parent: ITask, beforeDuedate: string) {
+  if (parent.recentDuedate != beforeDuedate || !beforeDuedate || parent) {
+    return;
+  }
+  const parentDuedate: string = parent.recentDuedate;
+  parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) => {
+    return a.duedate && a.duedate < b.duedate ? a : b;
+  }).duedate;
+  _updateRecentAtDelete(parent.parent, parentDuedate);
 }
 export function loadTasks() {
   if ('task' in localStorage) {
@@ -68,12 +77,12 @@ export function updateTask(task: ITask, name: string, duedate: string = '') {
   if (duedate < task.recentDuedate) {
     task.recentDuedate = duedate;
   }
-  _updateRecent(task);
+  _updateRecentAtCreate(task);
   _updateLocalstorage();
 }
 export function addChild(parent: ITask, child: ITask) {
   parent.children.push(child);
-  _updateRecent(child);
+  _updateRecentAtCreate(child);
   _updateLocalstorage();
 }
 export function addChildFromName(

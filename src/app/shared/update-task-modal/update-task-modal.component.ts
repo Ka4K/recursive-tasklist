@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { ITask, updateTask } from '../interface/task';
+import { ITask, updateTask } from '../../interface/task';
 
 @Component({
   selector: 'app-update-task-modal',
