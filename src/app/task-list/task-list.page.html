@@ -8,19 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-accordion-group *ngFor="let t of tasks">
-    <span *ngIf="t.path">
-      <ion-accordion>
-        <ion-item slot="header" lines="full">
+  <cdk-virtual-scroll-viewport [itemSize]="20" class="example-viewport">
+    <ion-accordion-group *cdkVirtualFor="let t of tasks">
+      <span *ngIf="t.path">
+        <ion-accordion>
+          <ion-item slot="header" lines="full">
+            <app-task-card [task]="t" [highlight]="true"></app-task-card>
+          </ion-item>
+          <ion-item slot="content"> {{t.path}} </ion-item>
+        </ion-accordion>
+      </span>
+      <span *ngIf="!t.path">
+        <ion-item lines="full">
           <app-task-card [task]="t" [highlight]="true"></app-task-card>
         </ion-item>
-        <ion-item slot="content"> {{t.path}} </ion-item>
-      </ion-accordion>
-    </span>
-    <span *ngIf="!t.path">
-      <ion-item lines="full">
-        <app-task-card [task]="t" [highlight]="true"></app-task-card>
-      </ion-item>
-    </span>
-  </ion-accordion-group>
+      </span>
+    </ion-accordion-group>
+  </cdk-virtual-scroll-viewport>
 </ion-content>

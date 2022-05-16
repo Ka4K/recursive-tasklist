@@ -8,6 +8,7 @@ import { TaskListPageRoutingModule } from './task-list-routing.module';
 
 import { TaskListPage } from './task-list.page';
 import { SharedModule } from '../shared/shared.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     IonicModule,
     TaskListPageRoutingModule,
     SharedModule,
+    ScrollingModule,
   ],
   declarations: [TaskListPage],
 })

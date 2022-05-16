@@ -21,6 +21,7 @@ export class TaskListPage implements OnInit {
     });
   }
   ionViewWillEnter() {
+    this.tasks = [];
     let root = rootTask();
     this.pushChild(root, '');
     this.tasks.sort((a: TaskWithPath, b: TaskWithPath) => {
