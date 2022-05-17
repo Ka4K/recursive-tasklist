@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ITask, ITaskWithPath } from '../interface/task';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  constructor() {}
+  constructor(private storage: Storage) {
+    this.initStorage();
+  }
+  async initStorage() {
+    await this.storage.create();
+  }
   root: ITask = {
     name: '',
     duedate: '',
@@ -16,53 +22,13 @@ export class TaskService {
   rootTask(): ITask {
     return this.root;
   }
-  private updateLocalstorage() {
-    localStorage.task = JSON.stringify(this.root, [
-      'name',
-      'duedate',
-      'recentDuedate',
-      'children',
-    ]);
-  }
-  private setParent(task: ITask) {
-    task.children.map((t) => {
-      t.parent = task;
-      if (t.children.length) {
-        this.setParent(t);
+  async loadTasks() {
+    await this.storage.get('task').then((data) => {
+      if (data) {
+        this.root.children = JSON.parse(data);
       }
     });
-  }
-  private updateRecentAtCreate(task: ITask) {
-    if (
-      !task.parent.parent ||
-      !task.recentDuedate ||
-      (task.parent.recentDuedate &&
-        task.recentDuedate > task.parent.recentDuedate)
-    ) {
-      return;
-    }
-    task.parent.recentDuedate = task.recentDuedate;
-    this.updateRecentAtCreate(task.parent);
-  }
-  private updateRecentAtDelete(parent: ITask, beforeDuedate: string) {
-    if (!beforeDuedate || !parent.parent) {
-      return;
-    }
-    const parentDuedate: string = parent.parent.recentDuedate;
-    if (parent.children.length) {
-      parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) => {
-        return a.duedate && a.duedate < b.duedate ? a : b;
-      }).duedate;
-    } else {
-      parent.recentDuedate = parent.duedate;
-    }
-    this.updateRecentAtDelete(parent.parent, parentDuedate);
-  }
-  loadTasks() {
-    if ('task' in localStorage) {
-      this.root = JSON.parse(localStorage.task);
-      this.setParent(this.root);
-    }
+    this.setParent(this.root);
   }
   updateTask(task: ITask, name: string, duedate: string = '') {
     task.name = name;
@@ -102,5 +68,50 @@ export class TaskService {
     }
     pushChild(this.root, '');
     return tasks;
+  }
+  private async updateLocalstorage() {
+    await this.storage.set(
+      'task',
+      JSON.stringify(this.root.children, [
+        'name',
+        'duedate',
+        'recentDuedate',
+        'children',
+      ])
+    );
+  }
+  private setParent(task: ITask) {
+    task.children.map((t) => {
+      t.parent = task;
+      if (t.children.length) {
+        this.setParent(t);
+      }
+    });
+  }
+  private updateRecentAtCreate(task: ITask) {
+    if (
+      !task.parent.parent ||
+      !task.recentDuedate ||
+      (task.parent.recentDuedate &&
+        task.recentDuedate > task.parent.recentDuedate)
+    ) {
+      return;
+    }
+    task.parent.recentDuedate = task.recentDuedate;
+    this.updateRecentAtCreate(task.parent);
+  }
+  private updateRecentAtDelete(parent: ITask, beforeDuedate: string) {
+    if (!beforeDuedate || !parent.parent) {
+      return;
+    }
+    const parentDuedate: string = parent.parent.recentDuedate;
+    if (parent.children.length) {
+      parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) => {
+        return a.duedate && a.duedate < b.duedate ? a : b;
+      }).duedate;
+    } else {
+      parent.recentDuedate = parent.duedate;
+    }
+    this.updateRecentAtDelete(parent.parent, parentDuedate);
   }
 }

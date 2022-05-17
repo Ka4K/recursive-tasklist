@@ -16,7 +16,7 @@ export class HomePage {
     private modalCtrl: ModalController,
     private taskService: TaskService
   ) {
-    this.task = taskService.rootTask();
+    this.task = this.taskService.rootTask();
   }
   async addTask(): Promise<void> {
     const modal = await this.modalCtrl.create({
