@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +7,12 @@ import { Injectable } from '@angular/core';
 export class TaskProgressService {
   private completeBeforeDuedate: number = 0;
   private completeAfterDuedate: number = 0;
-  constructor() {}
+  constructor(private storage: Storage) {
+    this.initStorage();
+  }
+  private async initStorage() {
+    await this.storage.create();
+  }
   increseComplete(duedate: string) {
     if (duedate) {
       if (this.compareDate(duedate, new Date().toISOString())) {
@@ -30,16 +36,23 @@ export class TaskProgressService {
     return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
   }
   private updateLocalstorage() {
-    localStorage.completeBeforeDuedate = String(this.completeBeforeDuedate);
-    localStorage.completeAfterDuedate = String(this.completeAfterDuedate);
+    this.storage.set(
+      'completeBeforeDuedate',
+      String(this.completeBeforeDuedate)
+    );
+    this.storage.set('completeAfterDuedate', String(this.completeAfterDuedate));
   }
-  loadLocalStorage() {
-    if ('completeBeforeDuedate' in localStorage) {
-      this.completeBeforeDuedate = Number(localStorage.completeBeforeDuedate);
-    }
-    if ('completeAfterDuedate' in localStorage) {
-      this.completeAfterDuedate = Number(localStorage.completeAfterDuedate);
-    }
+  async loadLocalStorage() {
+    await this.storage.get('completeBeforeDuedate').then((data) => {
+      if (data) {
+        this.completeBeforeDuedate = Number(data);
+      }
+    });
+    await this.storage.get('completeAfterDuedate').then((data) => {
+      if (data) {
+        this.completeAfterDuedate = Number(data);
+      }
+    });
   }
   clearCompleted() {
     this.completeBeforeDuedate = 0;

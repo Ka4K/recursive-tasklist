@@ -18,19 +18,20 @@ export class DeadlinePieChartComponent implements OnInit {
     responsive: true,
   };
   public pieChartLabels: Label[] = [['期限内'], ['遅延']];
-  public pieChartData: SingleDataSet;
+  public pieChartData: SingleDataSet = [0, 0];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor(private taskManager: TaskProgressService) {
+  constructor(private taskProgress: TaskProgressService) {}
+  ionViewWillEnter() {}
+  ngOnInit() {
     this.pieChartData = [
-      taskManager.getCompleteBeforeDuedate(),
-      taskManager.getCompleteAfterDuedate(),
+      this.taskProgress.getCompleteBeforeDuedate(),
+      this.taskProgress.getCompleteAfterDuedate(),
     ];
+    console.log(this.pieChartData);
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
-
-  ngOnInit() {}
 }
