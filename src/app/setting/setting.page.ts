@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { clearTasks } from '../interface/task';
 import { TaskProgressService } from '../shared/task-progress.service';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-setting',
@@ -10,8 +10,9 @@ import { TaskProgressService } from '../shared/task-progress.service';
 })
 export class SettingPage implements OnInit {
   constructor(
-    private taskManager: TaskProgressService,
-    private alertController: AlertController
+    private taskProgress: TaskProgressService,
+    private alertController: AlertController,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {}
@@ -31,9 +32,9 @@ export class SettingPage implements OnInit {
     prompt.present();
   }
   async clearTasks(): Promise<void> {
-    this.makeAlert(clearTasks);
+    this.makeAlert(this.taskService.clearTasks);
   }
   async clearCompleted(): Promise<void> {
-    this.makeAlert(this.taskManager.clearCompleted);
+    this.makeAlert(this.taskProgress.clearCompleted);
   }
 }

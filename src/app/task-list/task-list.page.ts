@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ITaskWithPath, ITask, allTasks } from '../interface/task';
+import { ITaskWithPath } from '../interface/task';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -8,11 +9,11 @@ import { ITaskWithPath, ITask, allTasks } from '../interface/task';
 })
 export class TaskListPage implements OnInit {
   tasks: ITaskWithPath[] = [];
-  constructor() {}
+  constructor(private taskService: TaskService) {}
 
   ngOnInit() {}
   ionViewWillEnter() {
-    this.tasks = allTasks();
+    this.tasks = this.taskService.allTasks();
     this.tasks.sort((a: ITaskWithPath, b: ITaskWithPath) => {
       return a.duedate > b.duedate ? 1 : -1;
     });

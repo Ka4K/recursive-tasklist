@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { loadTasks } from './interface/task';
+import { TaskService } from './shared/task.service';
 import { TaskProgressService } from './shared/task-progress.service';
 
 @Component({
@@ -14,8 +14,11 @@ export class AppComponent {
     { title: 'TaskList', url: '/tasks', icon: 'list' },
     { title: 'Setting', url: '/setting', icon: 'options' },
   ];
-  constructor(taskManager: TaskProgressService) {
-    loadTasks();
-    taskManager.loadLocalStorage();
+  constructor(
+    private taskProgress: TaskProgressService,
+    private taskService: TaskService
+  ) {
+    taskService.loadTasks();
+    taskProgress.loadLocalStorage();
   }
 }

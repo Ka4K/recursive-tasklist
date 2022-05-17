@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { addChildFromName, ITask } from '../../interface/task';
-
+import { ITask, newTask } from '../../interface/task';
+import { TaskService } from '../task.service';
 @Component({
   selector: 'app-make-child-modal',
   templateUrl: './make-child-modal.component.html',
@@ -9,12 +9,12 @@ import { addChildFromName, ITask } from '../../interface/task';
 })
 export class MakeChildModalComponent implements OnInit {
   task: ITask;
-  constructor(private navParams: NavParams) {}
+  constructor(private navParams: NavParams, private taskService: TaskService) {}
 
   ngOnInit() {
     this.task = this.navParams.data.parent;
   }
-  addTask(task: ITask, name: string, date: string) {
-    addChildFromName(task, name, date);
-  }
+  addTask = (task: ITask, name: string, date: string) => {
+    this.taskService.addChild(task, newTask(name, task, date));
+  };
 }

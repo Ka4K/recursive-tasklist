@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
-import { ITask, deleteChild } from 'src/app/interface/task';
+import { ITask } from 'src/app/interface/task';
 import { TaskProgressService } from '../task-progress.service';
 import { UpdateTaskModalComponent } from 'src/app/shared/update-task-modal/update-task-modal.component';
 import { MakeChildModalComponent } from 'src/app/shared/make-child-modal/make-child-modal.component';
+import { TaskService } from '../task.service';
 @Component({
   selector: 'app-task-card',
   templateUrl: './task-card.component.html',
@@ -20,7 +21,8 @@ export class TaskCardComponent implements OnInit {
   constructor(
     private actionSheetController: ActionSheetController,
     private modalCtrl: ModalController,
-    private taskManager: TaskProgressService
+    private taskManager: TaskProgressService,
+    private taskServise: TaskService
   ) {}
   async changeTask($event) {
     $event.stopPropagation();
@@ -40,7 +42,7 @@ export class TaskCardComponent implements OnInit {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            deleteChild(this.parent, this.index);
+            this.taskServise.deleteChild(this.parent, this.index);
           },
         },
         {
@@ -61,7 +63,7 @@ export class TaskCardComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
     this.taskManager.increseComplete(this.task.duedate);
-    deleteChild(this.parent, this.index);
+    this.taskServise.deleteChild(this.parent, this.index);
   }
   private async _renameTask() {
     const modal = await this.modalCtrl.create({

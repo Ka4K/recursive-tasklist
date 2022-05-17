@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { ITask, updateTask } from '../../interface/task';
+import { ITask } from '../../interface/task';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-update-task-modal',
@@ -9,12 +10,12 @@ import { ITask, updateTask } from '../../interface/task';
 })
 export class UpdateTaskModalComponent implements OnInit {
   task: ITask;
-  constructor(private navParams: NavParams) {}
+  constructor(private navParams: NavParams, private taskService: TaskService) {}
 
   ngOnInit() {
     this.task = this.navParams.data.task;
   }
-  update(task: ITask, name: string, date: string) {
-    updateTask(task, name, date);
-  }
+  update = (task: ITask, name: string, date: string) => {
+    this.taskService.updateTask(task, name, date);
+  };
 }
