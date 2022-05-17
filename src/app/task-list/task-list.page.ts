@@ -1,32 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { ITask } from '../interface/task';
-import { rootTask } from '../interface/task';
+import { ITaskWithPath, ITask, allTasks } from '../interface/task';
 
-interface TaskWithPath extends ITask {
-  path: string;
-}
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.page.html',
   styleUrls: ['./task-list.page.scss'],
 })
 export class TaskListPage implements OnInit {
-  tasks: TaskWithPath[] = [];
+  tasks: ITaskWithPath[] = [];
   constructor() {}
 
   ngOnInit() {}
-  private pushChild(parent: ITask, path: string) {
-    parent.children.map((task) => {
-      let t: TaskWithPath = { ...task, path: path };
-      this.tasks.push(t);
-      this.pushChild(task, path + '/' + task.name);
-    });
-  }
   ionViewWillEnter() {
-    this.tasks = [];
-    let root = rootTask();
-    this.pushChild(root, '');
-    this.tasks.sort((a: TaskWithPath, b: TaskWithPath) => {
+    this.tasks = allTasks();
+    this.tasks.sort((a: ITaskWithPath, b: ITaskWithPath) => {
       return a.duedate > b.duedate ? 1 : -1;
     });
   }

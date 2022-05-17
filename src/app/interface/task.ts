@@ -6,6 +6,9 @@ export interface ITask {
   children: ITask[];
   parent: ITask | null;
 }
+export interface ITaskWithPath extends ITask {
+  path: string;
+}
 let _root: ITask = {
   name: '',
   duedate: '',
@@ -123,4 +126,17 @@ export function sortTask(task: ITask) {
     });
     return task;
   }
+}
+
+export function allTasks(): ITaskWithPath[] {
+  let tasks: ITaskWithPath[] = [];
+  function pushChild(parent: ITask, path: string) {
+    parent.children.map((task) => {
+      let t: ITaskWithPath = { ...task, path: path };
+      tasks.push(t);
+      pushChild(task, path + '/' + task.name);
+    });
+  }
+  pushChild(_root, '');
+  return tasks;
 }

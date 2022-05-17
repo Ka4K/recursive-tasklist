@@ -11,23 +11,21 @@
   </ion-accordion-group>
 </span>
 <span *ngIf="virtualScroll">
-  <ng-container *ngIf="task.children.length">
-    <cdk-virtual-scroll-viewport
-      [itemSize]="20"
-      class="example-viewport"
-      [minBufferPx]="200"
-      [maxBufferPx]="500"
+  <cdk-virtual-scroll-viewport
+    [itemSize]="20"
+    class="example-viewport"
+    [minBufferPx]="200"
+    [maxBufferPx]="500"
+  >
+    <ion-accordion-group
+      *cdkVirtualFor="let t of task.children; let i = index"
+      #accordionGroup
     >
-      <ion-accordion-group
-        *cdkVirtualFor="let t of task.children; let i = index"
-        #accordionGroup
-      >
-        <app-show-task-body
-          [index]="i"
-          [parent]="task"
-          [task]="t"
-        ></app-show-task-body>
-      </ion-accordion-group>
-    </cdk-virtual-scroll-viewport>
-  </ng-container>
+      <app-show-task-body
+        [index]="i"
+        [parent]="task"
+        [task]="t"
+      ></app-show-task-body>
+    </ion-accordion-group>
+  </cdk-virtual-scroll-viewport>
 </span>
