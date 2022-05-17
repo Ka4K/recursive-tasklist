@@ -106,6 +106,7 @@ export function addChildFromName(
 export function deleteChild(parent: ITask, idx: number) {
   let beforeDuedate = parent.recentDuedate;
   parent.children.splice(idx, 1);
+  parent.children = [...parent.children];
   _updateRecentAtDelete(parent, beforeDuedate);
   _updateLocalstorage();
 }

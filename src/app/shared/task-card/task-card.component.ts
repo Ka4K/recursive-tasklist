@@ -29,19 +29,10 @@ export class TaskCardComponent implements OnInit {
       header: 'タスクの変更',
       buttons: [
         {
-          text: '完了',
-          icon: 'checkbox',
+          text: '変更',
+          icon: 'sync',
           handler: () => {
-            this.taskManager.increseComplete(this.task.duedate);
-            deleteChild(this.parent, this.index);
-          },
-        },
-        {
-          text: '削除',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            deleteChild(this.parent, this.index);
+            this._renameTask();
           },
         },
         {
@@ -52,10 +43,11 @@ export class TaskCardComponent implements OnInit {
           },
         },
         {
-          text: '変更',
-          icon: 'sync',
+          text: '削除',
+          role: 'destructive',
+          icon: 'trash',
           handler: () => {
-            this._renameTask();
+            deleteChild(this.parent, this.index);
           },
         },
         {
@@ -71,6 +63,12 @@ export class TaskCardComponent implements OnInit {
   ngOnInit() {}
   hasChildren(t: ITask) {
     return t.children.length;
+  }
+  taskComplete($event) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.taskManager.increseComplete(this.task.duedate);
+    deleteChild(this.parent, this.index);
   }
   private async _renameTask() {
     const modal = await this.modalCtrl.create({
