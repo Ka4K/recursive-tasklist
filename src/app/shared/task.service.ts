@@ -9,10 +9,10 @@ export class TaskService {
   constructor(private storage: Storage) {
     this.initStorage();
   }
-  async initStorage() {
+  private async initStorage() {
     await this.storage.create();
   }
-  root: ITask = {
+  private root: ITask = {
     name: '',
     duedate: '',
     recentDuedate: '',

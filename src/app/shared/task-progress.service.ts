@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TaskProgressService {
-  completeBeforeDuedate: number = 0;
-  completeAfterDuedate: number = 0;
+  private completeBeforeDuedate: number = 0;
+  private completeAfterDuedate: number = 0;
   constructor() {}
   increseComplete(duedate: string) {
     if (duedate) {
