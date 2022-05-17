@@ -15,10 +15,13 @@
   ></ion-label>
 </span>
 <span *ngIf="edit">
-  <ion-button (click)="changeTask($event)" slot="end">
+  <ion-button (click)="changeTask($event)" slot="end" color="secondary">
     <ion-icon name="pencil"></ion-icon>
   </ion-button>
-  <ion-button (click)="taskComplete($event)" slot="end">
+  <ion-button (click)="createChild($event)" slot="end" color="secondary">
+    <ion-icon name="add"></ion-icon>
+  </ion-button>
+  <ion-button (click)="taskComplete($event)" slot="end" color="secondary">
     <ion-icon name="checkbox"></ion-icon>
   </ion-button>
 </span>

@@ -48,10 +48,10 @@ function _updateRecentAtCreate(task: ITask) {
   _updateRecentAtCreate(task.parent);
 }
 function _updateRecentAtDelete(parent: ITask, beforeDuedate: string) {
-  if (!beforeDuedate || !parent) {
+  if (!beforeDuedate || !parent.parent) {
     return;
   }
-  const parentDuedate: string = parent.recentDuedate;
+  const parentDuedate: string = parent.parent.recentDuedate;
   if (parent.children.length) {
     parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) => {
       return a.duedate && a.duedate < b.duedate ? a : b;

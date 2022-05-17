@@ -36,13 +36,6 @@ export class TaskCardComponent implements OnInit {
           },
         },
         {
-          text: '子タスクの追加',
-          icon: 'create',
-          handler: () => {
-            this._createChild();
-          },
-        },
-        {
           text: '削除',
           role: 'destructive',
           icon: 'trash',
@@ -79,7 +72,9 @@ export class TaskCardComponent implements OnInit {
     });
     await modal.present();
   }
-  private async _createChild() {
+  async createChild($event) {
+    $event.stopPropagation();
+    $event.preventDefault();
     const modal = await this.modalCtrl.create({
       component: MakeChildModalComponent,
       componentProps: {
