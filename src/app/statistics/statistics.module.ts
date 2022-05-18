@@ -9,6 +9,7 @@ import { StatisticsPageRoutingModule } from './statistics-routing.module';
 import { StatisticsPage } from './statistics.page';
 import { DeadlinePieChartComponent } from './deadline-pie-chart/deadline-pie-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { CalendarHeatmapModule } from 'ng-calendar-heatmap';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +17,7 @@ import { ChartsModule } from 'ng2-charts';
     IonicModule,
     StatisticsPageRoutingModule,
     ChartsModule,
+    CalendarHeatmapModule,
   ],
   declarations: [StatisticsPage, DeadlinePieChartComponent],
 })

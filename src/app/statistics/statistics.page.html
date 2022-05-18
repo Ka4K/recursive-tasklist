@@ -7,4 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content><app-deadline-pie-chart></app-deadline-pie-chart> </ion-content>
+<ion-content>
+  <app-deadline-pie-chart></app-deadline-pie-chart>
+  <ng-calendar-heatmap
+    [data]="calendarData"
+    [options]="calendarOptions"
+  ></ng-calendar-heatmap>
+</ion-content>

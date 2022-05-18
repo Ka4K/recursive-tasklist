@@ -14,14 +14,14 @@ import { TaskProgressService } from 'src/app/shared/task-progress.service';
   styleUrls: ['./deadline-pie-chart.component.scss'],
 })
 export class DeadlinePieChartComponent implements OnInit {
-  public pieChartOptions: ChartOptions = {
+  pieChartOptions: ChartOptions = {
     responsive: true,
   };
-  public pieChartLabels: Label[] = [['期限内'], ['遅延']];
-  public pieChartData: SingleDataSet = [0, 0];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  pieChartLabels: Label[] = [['期限内'], ['遅延']];
+  pieChartData: SingleDataSet = [0, 0];
+  pieChartType: ChartType = 'pie';
+  pieChartLegend = true;
+  pieChartPlugins = [];
 
   constructor(private taskProgress: TaskProgressService) {}
   ionViewWillEnter() {}
@@ -30,7 +30,6 @@ export class DeadlinePieChartComponent implements OnInit {
       this.taskProgress.getCompleteBeforeDuedate(),
       this.taskProgress.getCompleteAfterDuedate(),
     ];
-    console.log(this.pieChartData);
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
