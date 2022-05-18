@@ -9,8 +9,16 @@
 
 <ion-content>
   <app-deadline-pie-chart></app-deadline-pie-chart>
-  <ng-calendar-heatmap
-    [data]="calendarData"
-    [options]="calendarOptions"
-  ></ng-calendar-heatmap>
+  <ion-item *ngIf="isMobile">
+    <ng-calendar-heatmap
+      [data]="calendarData"
+      [options]="calendarOptions"
+    ></ng-calendar-heatmap>
+  </ion-item>
+  <span *ngIf="!isMobile">
+    <ng-calendar-heatmap
+      [data]="calendarData"
+      [options]="calendarOptions"
+    ></ng-calendar-heatmap>
+  </span>
 </ion-content>
