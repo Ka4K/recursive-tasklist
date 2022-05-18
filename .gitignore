@@ -32,3 +32,6 @@ npm-debug.log*
 /www
 /ios
 /android
+.firebaserc
+firebase.json
+.firebase
