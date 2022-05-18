@@ -15,7 +15,7 @@ export class TaskListPage implements OnInit {
   ionViewWillEnter() {
     this.tasks = this.taskService.allTasks();
     this.tasks.sort((a: ITaskWithPath, b: ITaskWithPath) => {
-      return a.duedate > b.duedate ? 1 : -1;
+      return !a.duedate && a.duedate > b.duedate ? 1 : -1;
     });
   }
 }

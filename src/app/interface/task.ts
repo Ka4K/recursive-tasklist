@@ -28,7 +28,7 @@ export function cloneTask(task: ITask) {
 export function sortTask(task: ITask) {
   if (task.children.length) {
     task.children = task.children.sort((a, b) => {
-      return a.recentDuedate > b.recentDuedate ? 1 : -1;
+      return !a.recentDuedate && a.recentDuedate > b.recentDuedate ? 1 : -1;
     });
     task.children.map((t) => {
       sortTask(t);
