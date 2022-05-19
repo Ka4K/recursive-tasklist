@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ITask, ITaskWithPath } from '../interface/task';
+import { ITask, ITaskWithPath, newTask } from '../interface/task';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private root: ITask = {
-    name: '',
-    duedate: '',
-    recentDuedate: '',
-    children: [],
-    parent: null,
-  };
+  private root: ITask = newTask('', null);
+
   constructor(private storage: Storage) {
     this.initStorage();
   }
