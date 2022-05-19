@@ -15,8 +15,8 @@ export class TaskCardComponent implements OnInit {
   @Input() highlight = false;
   @Input() showRecent = false;
   @Input() edit = false;
-  @Input() parent: ITask | undefined;
   @Input() index: number | undefined;
+  parent: ITask | null;
 
   constructor(
     private actionSheetController: ActionSheetController,
@@ -24,6 +24,9 @@ export class TaskCardComponent implements OnInit {
     private taskManager: TaskProgressService,
     private taskServise: TaskService
   ) {}
+  ngOnInit() {
+    this.parent = this.task.parent;
+  }
   async changeTask($event) {
     $event.stopPropagation();
     $event.preventDefault();
@@ -64,7 +67,6 @@ export class TaskCardComponent implements OnInit {
     });
     await modal.present();
   }
-  ngOnInit() {}
   hasChildren(t: ITask) {
     return t.children.length;
   }
