@@ -64,6 +64,7 @@ export class TaskProgressService {
   clearCompleted() {
     this.completeBeforeDuedate = 0;
     this.completeAfterDuedate = 0;
+    this.calendarData = [];
     this.updateLocalstorage();
   }
   private async initStorage() {
