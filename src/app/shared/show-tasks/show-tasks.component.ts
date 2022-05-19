@@ -8,7 +8,7 @@ import { ITask } from 'src/app/interface/task';
 })
 export class ShowTasksComponent implements OnInit {
   @Input() task: ITask;
-  @Input() virtualScroll: boolean = false;
+  @Input() virtualScroll = false;
   constructor() {}
   ngOnInit() {}
 }

@@ -10,11 +10,11 @@ import { ITask } from 'src/app/interface/task';
 export class ManipulationTaskComponent implements OnInit {
   @Input() task: ITask;
   @Input() manipulation: (task: ITask, name: string, date: string) => void;
-  @Input() buttonName: string = '追加';
-  @Input() name: string = '';
-  @Input() duedate: string = '';
-  @Input() isModal: boolean = false;
-  @Input() maxDuedate: string = undefined;
+  @Input() buttonName = '追加';
+  @Input() name = '';
+  @Input() duedate = '';
+  @Input() isModal = false;
+  @Input() maxDuedate = undefined;
   now: string;
 
   constructor(private modalCtrl: ModalController) {}

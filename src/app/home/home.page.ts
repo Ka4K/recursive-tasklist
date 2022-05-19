@@ -11,7 +11,7 @@ import { MakeChildModalComponent } from '../shared/make-child-modal/make-child-m
 })
 export class HomePage {
   task: ITask;
-  sort: boolean = false;
+  sort = false;
   constructor(
     private modalCtrl: ModalController,
     private taskService: TaskService

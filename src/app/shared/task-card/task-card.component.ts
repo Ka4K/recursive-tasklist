@@ -12,9 +12,9 @@ import { TaskService } from '../task.service';
 })
 export class TaskCardComponent implements OnInit {
   @Input() task: ITask;
-  @Input() highlight: boolean = false;
-  @Input() showRecent: boolean = false;
-  @Input() edit: boolean = false;
+  @Input() highlight = false;
+  @Input() showRecent = false;
+  @Input() edit = false;
   @Input() parent: ITask | undefined;
   @Input() index: number | undefined;
 
@@ -33,9 +33,7 @@ export class TaskCardComponent implements OnInit {
         {
           text: '変更',
           icon: 'sync',
-          handler: () => {
-            this._renameTask();
-          },
+          handler: () => this.renameTask(),
         },
         {
           text: '削除',
@@ -55,6 +53,17 @@ export class TaskCardComponent implements OnInit {
     });
     actionSheet.present();
   }
+  async createChild($event) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    const modal = await this.modalCtrl.create({
+      component: MakeChildModalComponent,
+      componentProps: {
+        parent: this.task,
+      },
+    });
+    await modal.present();
+  }
   ngOnInit() {}
   hasChildren(t: ITask) {
     return t.children.length;
@@ -65,22 +74,11 @@ export class TaskCardComponent implements OnInit {
     this.taskManager.increseComplete(this.task.duedate);
     this.taskServise.deleteChild(this.parent, this.index);
   }
-  private async _renameTask() {
+  private async renameTask() {
     const modal = await this.modalCtrl.create({
       component: UpdateTaskModalComponent,
       componentProps: {
         task: this.task,
-      },
-    });
-    await modal.present();
-  }
-  async createChild($event) {
-    $event.stopPropagation();
-    $event.preventDefault();
-    const modal = await this.modalCtrl.create({
-      component: MakeChildModalComponent,
-      componentProps: {
-        parent: this.task,
       },
     });
     await modal.present();

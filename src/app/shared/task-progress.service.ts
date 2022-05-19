@@ -6,17 +6,14 @@ import { CalendarData } from 'ng-calendar-heatmap';
   providedIn: 'root',
 })
 export class TaskProgressService {
-  private completeBeforeDuedate: number = 0;
-  private completeAfterDuedate: number = 0;
+  private completeBeforeDuedate = 0;
+  private completeAfterDuedate = 0;
   private calendarData: CalendarData[] = [];
   constructor(private storage: Storage) {
     this.initStorage();
   }
-  private async initStorage() {
-    await this.storage.create();
-  }
   increseComplete(duedate: string) {
-    let today = new Date().toISOString();
+    const today = new Date().toISOString();
     if (duedate) {
       if (this.compareDate(duedate, today)) {
         this.completeBeforeDuedate++;
@@ -24,9 +21,9 @@ export class TaskProgressService {
         this.completeAfterDuedate++;
       }
     }
-    let val = this.calendarData.find((elm) => {
-      return elm.date == new Date(this.getYYYYMMDD(today));
-    });
+    const val = this.calendarData.find(
+      (elm) => elm.date === new Date(this.getYYYYMMDD(today))
+    );
     if (val) {
       val.count++;
     } else {
@@ -46,20 +43,7 @@ export class TaskProgressService {
   getCalendarData() {
     return this.calendarData;
   }
-  private getYYYYMMDD(date: string): string {
-    return date.slice(0, 10);
-  }
-  private compareDate(a: string, b: string): boolean {
-    return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
-  }
-  private updateLocalstorage() {
-    this.storage.set(
-      'completeBeforeDuedate',
-      String(this.completeBeforeDuedate)
-    );
-    this.storage.set('completeAfterDuedate', String(this.completeAfterDuedate));
-    this.storage.set('calendarData', JSON.stringify(this.calendarData));
-  }
+
   async loadLocalStorage() {
     await this.storage.get('completeBeforeDuedate').then((data) => {
       if (data) {
@@ -81,5 +65,22 @@ export class TaskProgressService {
     this.completeBeforeDuedate = 0;
     this.completeAfterDuedate = 0;
     this.updateLocalstorage();
+  }
+  private async initStorage() {
+    await this.storage.create();
+  }
+  private getYYYYMMDD(date: string): string {
+    return date.slice(0, 10);
+  }
+  private compareDate(a: string, b: string): boolean {
+    return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
+  }
+  private updateLocalstorage() {
+    this.storage.set(
+      'completeBeforeDuedate',
+      String(this.completeBeforeDuedate)
+    );
+    this.storage.set('completeAfterDuedate', String(this.completeAfterDuedate));
+    this.storage.set('calendarData', JSON.stringify(this.calendarData));
   }
 }

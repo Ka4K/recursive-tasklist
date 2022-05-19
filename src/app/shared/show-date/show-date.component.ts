@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ShowDateComponent implements OnInit {
   @Input() date: string;
-  @Input() highlight: boolean = false;
+  @Input() highlight = false;
   constructor() {}
 
   ngOnInit() {}

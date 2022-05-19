@@ -6,12 +6,6 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private storage: Storage) {
-    this.initStorage();
-  }
-  private async initStorage() {
-    await this.storage.create();
-  }
   private root: ITask = {
     name: '',
     duedate: '',
@@ -19,6 +13,10 @@ export class TaskService {
     children: [],
     parent: null,
   };
+  constructor(private storage: Storage) {
+    this.initStorage();
+  }
+
   rootTask(): ITask {
     return this.root;
   }
@@ -47,10 +45,9 @@ export class TaskService {
     this.updateLocalstorage();
   }
   deleteChild(parent: ITask, idx: number) {
-    let beforeDuedate = parent.recentDuedate;
     parent.children.splice(idx, 1);
     parent.children = [...parent.children];
-    this.updateRecentAtDelete(parent, beforeDuedate);
+    this.updateRecentAtDelete(parent, parent.recentDuedate);
     this.updateLocalstorage();
   }
   clearTasks() {
@@ -58,16 +55,19 @@ export class TaskService {
     this.updateLocalstorage();
   }
   allTasks(): ITaskWithPath[] {
-    let tasks: ITaskWithPath[] = [];
-    function pushChild(parent: ITask, path: string) {
+    const tasks: ITaskWithPath[] = [];
+    const pushChild = (parent: ITask, path: string) => {
       parent.children.map((task) => {
-        let t: ITaskWithPath = { ...task, path: path };
+        const t: ITaskWithPath = { ...task, path };
         tasks.push(t);
         pushChild(task, path + '/' + task.name);
       });
-    }
+    };
     pushChild(this.root, '');
     return tasks;
+  }
+  private async initStorage() {
+    await this.storage.create();
   }
   private async updateLocalstorage() {
     await this.storage.set(
@@ -106,9 +106,9 @@ export class TaskService {
     }
     const parentDuedate: string = parent.parent.recentDuedate;
     if (parent.children.length) {
-      parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) => {
-        return a.duedate && a.duedate < b.duedate ? a : b;
-      }).duedate;
+      parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) =>
+        a.duedate && a.duedate < b.duedate ? a : b
+      ).duedate;
     } else {
       parent.recentDuedate = parent.duedate;
     }

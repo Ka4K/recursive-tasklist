@@ -14,8 +14,8 @@ export class TaskListPage implements OnInit {
   ngOnInit() {}
   ionViewWillEnter() {
     this.tasks = this.taskService.allTasks();
-    this.tasks.sort((a: ITaskWithPath, b: ITaskWithPath) => {
-      return !a.duedate && a.duedate > b.duedate ? 1 : -1;
-    });
+    this.tasks.sort((a: ITaskWithPath, b: ITaskWithPath) =>
+      !a.duedate && a.duedate > b.duedate ? 1 : -1
+    );
   }
 }

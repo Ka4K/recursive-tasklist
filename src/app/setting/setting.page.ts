@@ -16,7 +16,13 @@ export class SettingPage implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  private async makeAlert(handler: (any) => boolean | void): Promise<void> {
+  async clearTasks(): Promise<void> {
+    this.makeAlert(this.taskService.clearTasks);
+  }
+  async clearCompleted(): Promise<void> {
+    this.makeAlert(this.taskProgress.clearCompleted);
+  }
+  private async makeAlert(handler: () => boolean | void): Promise<void> {
     const prompt = await this.alertController.create({
       header: 'この操作は元に戻せません。よろしいですか？',
       buttons: [
@@ -25,16 +31,10 @@ export class SettingPage implements OnInit {
         },
         {
           text: 'はい',
-          handler: handler,
+          handler,
         },
       ],
     });
     prompt.present();
-  }
-  async clearTasks(): Promise<void> {
-    this.makeAlert(this.taskService.clearTasks);
-  }
-  async clearCompleted(): Promise<void> {
-    this.makeAlert(this.taskProgress.clearCompleted);
   }
 }
