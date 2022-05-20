@@ -21,8 +21,10 @@ export class TaskProgressService {
         this.completeAfterDuedate++;
       }
     }
+
     const val = this.calendarData.find(
-      (elm) => elm.date === new Date(this.getYYYYMMDD(today))
+      (elm) =>
+        this.getYYYYMMDD(elm.date.toISOString()) === this.getYYYYMMDD(today)
     );
     if (val) {
       val.count++;
@@ -40,33 +42,34 @@ export class TaskProgressService {
   getCompleteAfterDuedate(): number {
     return this.completeAfterDuedate;
   }
-  getCalendarData() {
+  getCalendarData(): CalendarData[] {
     return this.calendarData;
   }
 
-  async loadLocalStorage() {
-    await this.storage.get('completeBeforeDuedate').then((data) => {
+  loadLocalStorage(): void {
+    this.storage.get('completeBeforeDuedate').then((data) => {
       if (data) {
         this.completeBeforeDuedate = Number(data);
       }
     });
-    await this.storage.get('completeAfterDuedate').then((data) => {
+    this.storage.get('completeAfterDuedate').then((data) => {
       if (data) {
         this.completeAfterDuedate = Number(data);
       }
     });
-    await this.storage.get('calendarData').then((data) => {
+    this.storage.get('calendarData').then((data) => {
       if (data) {
         this.calendarData = JSON.parse(data);
+        this.calendarData.map((elm) => (elm.date = new Date(elm.date)));
       }
     });
   }
-  clearCompleted() {
+  clearCompleted = () => {
     this.completeBeforeDuedate = 0;
     this.completeAfterDuedate = 0;
     this.calendarData = [];
     this.updateLocalstorage();
-  }
+  };
   private async initStorage() {
     await this.storage.create();
   }

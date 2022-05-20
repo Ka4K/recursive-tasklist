@@ -45,10 +45,10 @@ export class TaskService {
     this.updateRecentAtDelete(parent, parent.recentDuedate);
     this.updateLocalstorage();
   }
-  clearTasks() {
+  clearTasks = () => {
     this.root.children = [];
     this.updateLocalstorage();
-  }
+  };
   allTasks(): ITaskWithPath[] {
     const tasks: ITaskWithPath[] = [];
     const pushChild = (parent: ITask, path: string) => {
