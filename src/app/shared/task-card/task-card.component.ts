@@ -24,45 +24,47 @@ export class TaskCardComponent implements OnInit {
     private taskServise: TaskService
   ) {}
   ngOnInit(): void {}
-  async changeTask($event): Promise<void> {
+  changeTask($event): void {
     $event.stopPropagation();
     $event.preventDefault();
-    const actionSheet = await this.actionSheetController.create({
-      header: 'タスクの変更',
-      buttons: [
-        {
-          text: '変更',
-          icon: 'sync',
-          handler: () => this.renameTask(),
-        },
-        {
-          text: '削除',
-          role: 'destructive',
-          icon: 'trash',
-          handler: () => {
-            this.taskServise.deleteChild(this.task.parent, this.index);
+    this.actionSheetController
+      .create({
+        header: 'タスクの変更',
+        buttons: [
+          {
+            text: '変更',
+            icon: 'sync',
+            handler: () => this.renameTask(),
           },
-        },
-        {
-          text: '閉じる',
-          icon: 'close',
-          role: 'cancel',
-          handler: () => {},
-        },
-      ],
-    });
-    actionSheet.present();
+          {
+            text: '削除',
+            role: 'destructive',
+            icon: 'trash',
+            handler: () => {
+              this.taskServise.deleteChild(this.task.parent, this.index);
+            },
+          },
+          {
+            text: '閉じる',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {},
+          },
+        ],
+      })
+      .then((actionSheet) => actionSheet.present());
   }
-  async createChild($event): Promise<void> {
+  createChild($event): void {
     $event.stopPropagation();
     $event.preventDefault();
-    const modal = await this.modalCtrl.create({
-      component: MakeChildModalComponent,
-      componentProps: {
-        parent: this.task,
-      },
-    });
-    await modal.present();
+    this.modalCtrl
+      .create({
+        component: MakeChildModalComponent,
+        componentProps: {
+          parent: this.task,
+        },
+      })
+      .then((modal) => modal.present());
   }
   hasChildren(t: ITask): boolean {
     return !!t.children.length;
@@ -73,13 +75,14 @@ export class TaskCardComponent implements OnInit {
     this.taskManager.increseComplete(this.task.duedate);
     this.taskServise.deleteChild(this.task.parent, this.index);
   }
-  private async renameTask(): Promise<void> {
-    const modal = await this.modalCtrl.create({
-      component: UpdateTaskModalComponent,
-      componentProps: {
-        task: this.task,
-      },
-    });
-    await modal.present();
+  private renameTask(): void {
+    this.modalCtrl
+      .create({
+        component: UpdateTaskModalComponent,
+        componentProps: {
+          task: this.task,
+        },
+      })
+      .then((modal) => modal.present());
   }
 }
