@@ -24,8 +24,7 @@ export class DeadlinePieChartComponent implements OnInit {
   pieChartPlugins = [];
 
   constructor(private taskProgress: TaskProgressService) {}
-  ionViewWillEnter() {}
-  ngOnInit() {
+  ngOnInit(): void {
     this.pieChartData = [
       this.taskProgress.getCompleteBeforeDuedate(),
       this.taskProgress.getCompleteAfterDuedate(),

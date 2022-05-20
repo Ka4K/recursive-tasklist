@@ -11,10 +11,10 @@ export class MakeChildModalComponent implements OnInit {
   task: ITask;
   constructor(private navParams: NavParams, private taskService: TaskService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.task = this.navParams.data.parent;
   }
-  addTask = (task: ITask, name: string, date: string) => {
+  addTask = (task: ITask, name: string, date: string): void => {
     this.taskService.addChild(task, newTask(name, task, date));
   };
 }

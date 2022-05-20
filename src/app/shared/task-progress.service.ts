@@ -12,7 +12,7 @@ export class TaskProgressService {
   constructor(private storage: Storage) {
     this.initStorage();
   }
-  increseComplete(duedate: string) {
+  increseComplete(duedate: string): void {
     const today = new Date().toISOString();
     if (duedate) {
       if (this.compareDate(duedate, today)) {
@@ -21,7 +21,6 @@ export class TaskProgressService {
         this.completeAfterDuedate++;
       }
     }
-
     const val = this.calendarData.find(
       (elm) =>
         this.getYYYYMMDD(elm.date.toISOString()) === this.getYYYYMMDD(today)
@@ -64,14 +63,14 @@ export class TaskProgressService {
       }
     });
   }
-  clearCompleted = () => {
+  clearCompleted = (): void => {
     this.completeBeforeDuedate = 0;
     this.completeAfterDuedate = 0;
     this.calendarData = [];
     this.updateLocalstorage();
   };
-  private async initStorage() {
-    await this.storage.create();
+  private initStorage(): void {
+    this.storage.create();
   }
   private getYYYYMMDD(date: string): string {
     return date.slice(0, 10);
@@ -79,7 +78,7 @@ export class TaskProgressService {
   private compareDate(a: string, b: string): boolean {
     return this.getYYYYMMDD(a) >= this.getYYYYMMDD(b);
   }
-  private updateLocalstorage() {
+  private updateLocalstorage(): void {
     this.storage.set(
       'completeBeforeDuedate',
       String(this.completeBeforeDuedate)

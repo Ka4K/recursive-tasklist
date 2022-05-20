@@ -10,8 +10,8 @@ export class ShowDateComponent implements OnInit {
   @Input() highlight = false;
   constructor() {}
 
-  ngOnInit() {}
-  dueDateIsToday() {
+  ngOnInit(): void {}
+  dueDateIsToday(): boolean {
     return this.date.slice(0, 10) <= new Date().toISOString().slice(0, 10);
   }
 }

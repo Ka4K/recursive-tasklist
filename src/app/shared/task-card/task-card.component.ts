@@ -16,7 +16,6 @@ export class TaskCardComponent implements OnInit {
   @Input() showRecent = false;
   @Input() edit = false;
   @Input() index: number | undefined;
-  parent: ITask | null;
 
   constructor(
     private actionSheetController: ActionSheetController,
@@ -24,10 +23,8 @@ export class TaskCardComponent implements OnInit {
     private taskManager: TaskProgressService,
     private taskServise: TaskService
   ) {}
-  ngOnInit() {
-    this.parent = this.task.parent;
-  }
-  async changeTask($event) {
+  ngOnInit(): void {}
+  async changeTask($event): Promise<void> {
     $event.stopPropagation();
     $event.preventDefault();
     const actionSheet = await this.actionSheetController.create({
@@ -43,7 +40,7 @@ export class TaskCardComponent implements OnInit {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            this.taskServise.deleteChild(this.parent, this.index);
+            this.taskServise.deleteChild(this.task.parent, this.index);
           },
         },
         {
@@ -56,7 +53,7 @@ export class TaskCardComponent implements OnInit {
     });
     actionSheet.present();
   }
-  async createChild($event) {
+  async createChild($event): Promise<void> {
     $event.stopPropagation();
     $event.preventDefault();
     const modal = await this.modalCtrl.create({
@@ -67,16 +64,16 @@ export class TaskCardComponent implements OnInit {
     });
     await modal.present();
   }
-  hasChildren(t: ITask) {
-    return t.children.length;
+  hasChildren(t: ITask): boolean {
+    return !!t.children.length;
   }
-  taskComplete($event) {
+  taskComplete($event): void {
     $event.stopPropagation();
     $event.preventDefault();
     this.taskManager.increseComplete(this.task.duedate);
-    this.taskServise.deleteChild(this.parent, this.index);
+    this.taskServise.deleteChild(this.task.parent, this.index);
   }
-  private async renameTask() {
+  private async renameTask(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: UpdateTaskModalComponent,
       componentProps: {

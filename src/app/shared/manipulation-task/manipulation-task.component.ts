@@ -19,17 +19,17 @@ export class ManipulationTaskComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.now = new Date().toISOString();
   }
 
-  update(task: ITask, name: string, date: string) {
+  update(task: ITask, name: string, date: string): void {
     this.manipulation(task, name, date);
     if (this.isModal) {
       this.modalCtrl.dismiss();
     }
   }
-  cancel() {
+  cancel(): void {
     if (this.isModal) {
       this.modalCtrl.dismiss();
     }

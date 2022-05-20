@@ -16,6 +16,5 @@ export class StatisticsPage implements OnInit {
   constructor(private taskProgress: TaskProgressService) {
     this.calendarData = taskProgress.getCalendarData();
   }
-  ionViewWillEnter() {}
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

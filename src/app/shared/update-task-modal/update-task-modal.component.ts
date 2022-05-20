@@ -12,10 +12,10 @@ export class UpdateTaskModalComponent implements OnInit {
   task: ITask;
   constructor(private navParams: NavParams, private taskService: TaskService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.task = this.navParams.data.task;
   }
-  update = (task: ITask, name: string, date: string) => {
+  update = (task: ITask, name: string, date: string): void => {
     this.taskService.updateTask(task, name, date);
   };
 }

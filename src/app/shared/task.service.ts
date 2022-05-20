@@ -15,15 +15,15 @@ export class TaskService {
   rootTask(): ITask {
     return this.root;
   }
-  async loadTasks() {
-    await this.storage.get('task').then((data) => {
+  loadTasks(): void {
+    this.storage.get('task').then((data) => {
       if (data) {
         this.root.children = JSON.parse(data);
       }
+      this.setParent(this.root);
     });
-    this.setParent(this.root);
   }
-  updateTask(task: ITask, name: string, duedate: string = '') {
+  updateTask = (task: ITask, name: string, duedate: string = ''): void => {
     task.name = name;
     task.duedate = duedate;
     if (duedate < task.recentDuedate || !task.recentDuedate) {
@@ -33,19 +33,19 @@ export class TaskService {
       this.updateRecentAtDelete(task.parent, task.parent.recentDuedate);
     }
     this.updateLocalstorage();
-  }
-  addChild(parent: ITask, child: ITask) {
+  };
+  addChild = (parent: ITask, child: ITask): void => {
     parent.children = [...parent.children, child];
     this.updateRecentAtCreate(child);
     this.updateLocalstorage();
-  }
-  deleteChild(parent: ITask, idx: number) {
+  };
+  deleteChild = (parent: ITask, idx: number): void => {
     parent.children.splice(idx, 1);
     parent.children = [...parent.children];
     this.updateRecentAtDelete(parent, parent.recentDuedate);
     this.updateLocalstorage();
-  }
-  clearTasks = () => {
+  };
+  clearTasks = (): void => {
     this.root.children = [];
     this.updateLocalstorage();
   };
@@ -61,11 +61,11 @@ export class TaskService {
     pushChild(this.root, '');
     return tasks;
   }
-  private async initStorage() {
-    await this.storage.create();
+  private initStorage(): void {
+    this.storage.create();
   }
-  private async updateLocalstorage() {
-    await this.storage.set(
+  private updateLocalstorage(): void {
+    this.storage.set(
       'task',
       JSON.stringify(this.root.children, [
         'name',
@@ -75,7 +75,7 @@ export class TaskService {
       ])
     );
   }
-  private setParent(task: ITask) {
+  private setParent(task: ITask): void {
     task.children.map((t) => {
       t.parent = task;
       if (t.children.length) {
@@ -83,7 +83,7 @@ export class TaskService {
       }
     });
   }
-  private updateRecentAtCreate(task: ITask) {
+  private updateRecentAtCreate(task: ITask): void {
     if (
       !task.parent.parent ||
       !task.recentDuedate ||
@@ -95,7 +95,7 @@ export class TaskService {
     task.parent.recentDuedate = task.recentDuedate;
     this.updateRecentAtCreate(task.parent);
   }
-  private updateRecentAtDelete(parent: ITask, beforeDuedate: string) {
+  private updateRecentAtDelete(parent: ITask, beforeDuedate: string): void {
     if (!beforeDuedate || !parent.parent) {
       return;
     }

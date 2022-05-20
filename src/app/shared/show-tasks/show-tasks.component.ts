@@ -10,5 +10,5 @@ export class ShowTasksComponent implements OnInit {
   @Input() task: ITask;
   @Input() virtualScroll = false;
   constructor() {}
-  ngOnInit() {}
+  ngOnInit(): void {}
 }
