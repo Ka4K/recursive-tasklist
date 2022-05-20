@@ -22,19 +22,20 @@ export class SettingPage implements OnInit {
   async clearCompleted(): Promise<void> {
     this.makeAlert(this.taskProgress.clearCompleted);
   }
-  private async makeAlert(handler: () => boolean | void): Promise<void> {
-    const prompt = await this.alertController.create({
-      header: 'この操作は元に戻せません。よろしいですか？',
-      buttons: [
-        {
-          text: 'いいえ',
-        },
-        {
-          text: 'はい',
-          handler,
-        },
-      ],
-    });
-    prompt.present();
+  private makeAlert(handler: () => boolean | void): void {
+    this.alertController
+      .create({
+        header: 'この操作は元に戻せません。よろしいですか？',
+        buttons: [
+          {
+            text: 'いいえ',
+          },
+          {
+            text: 'はい',
+            handler,
+          },
+        ],
+      })
+      .then((prompt) => prompt.present());
   }
 }
