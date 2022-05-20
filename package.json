@@ -37,7 +37,6 @@
     "moment": "^2.29.3",
     "ng-calendar-heatmap": "^0.4.2",
     "ng2-charts": "2.2.3",
-    "precommit": "^1.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -77,7 +76,8 @@
     "prettier": "^2.6.2",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.4.4"
+    "typescript": "~4.4.4",
+    "precommit": "^1.2.2"
   },
   "description": "An Ionic project",
   "lint-staged": {
