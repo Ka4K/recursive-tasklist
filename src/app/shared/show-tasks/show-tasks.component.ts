@@ -9,6 +9,7 @@ import { ITask } from 'src/app/interface/task';
 export class ShowTasksComponent implements OnInit {
   @Input() task: ITask;
   @Input() virtualScroll = false;
+  @Input() editable = true;
   constructor() {}
   ngOnInit(): void {}
 }
