@@ -18,14 +18,15 @@ export class HomePage {
   ) {
     this.task = this.taskService.rootTask();
   }
-  async addTask(): Promise<void> {
-    const modal = await this.modalCtrl.create({
-      component: MakeChildModalComponent,
-      componentProps: {
-        parent: this.task,
-      },
-    });
-    await modal.present();
+  addTask(): void {
+    this.modalCtrl
+      .create({
+        component: MakeChildModalComponent,
+        componentProps: {
+          parent: this.task,
+        },
+      })
+      .then((modal) => modal.present());
   }
 
   sortTasks(task: ITask): ITask {
