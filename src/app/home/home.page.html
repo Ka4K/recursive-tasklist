@@ -8,19 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label slot="end">Sort</ion-label>
-    <ion-toggle slot="end" [(ngModel)]="sort"></ion-toggle>
-  </ion-item>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addTask()">
       <ion-icon name="add"> </ion-icon
     ></ion-fab-button>
   </ion-fab>
-  <app-show-tasks
-    [task]="sort&&task.children.length?sortTasks(task):task"
-    [virtualScroll]="true"
-    [editable]="!sort"
-  >
-  </app-show-tasks>
+  <app-show-tasks [task]="task" [virtualScroll]="true"> </app-show-tasks>
 </ion-content>

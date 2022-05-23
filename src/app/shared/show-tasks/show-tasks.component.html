@@ -3,11 +3,7 @@
     *ngFor="let t of task.children; let i = index"
     #accordionGroup
   >
-    <app-show-task-body
-      [index]="i"
-      [task]="t"
-      [editable]="editable"
-    ></app-show-task-body>
+    <app-show-task-body [index]="i" [task]="t"></app-show-task-body>
   </ion-accordion-group>
 </span>
 <span *ngIf="virtualScroll">
@@ -21,11 +17,7 @@
       *cdkVirtualFor="let t of task.children; let i = index"
       #accordionGroup
     >
-      <app-show-task-body
-        [index]="i"
-        [task]="t"
-        [editable]="editable"
-      ></app-show-task-body>
+      <app-show-task-body [index]="i" [task]="t"></app-show-task-body>
     </ion-accordion-group>
   </cdk-virtual-scroll-viewport>
 </span>

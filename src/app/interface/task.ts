@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 export interface ITask {
   name: string;
   duedate: string;
@@ -20,17 +19,3 @@ export const newTask = (
   children: [],
   parent,
 });
-
-export const cloneTask = (task: ITask): ITask => cloneDeep(task);
-
-export const sortTask = (task: ITask): ITask => {
-  if (task.children.length) {
-    task.children = task.children.sort((a, b) =>
-      !a.recentDuedate && a.recentDuedate > b.recentDuedate ? 1 : -1
-    );
-    task.children.map((t) => {
-      sortTask(t);
-    });
-    return task;
-  }
-};

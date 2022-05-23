@@ -4,13 +4,13 @@
       <app-task-card
         [task]="task"
         [highlight]="true"
-        [edit]="editable"
+        [edit]="true"
         [index]="index"
         [showRecent]="true"
       ></app-task-card>
     </ion-item>
     <ion-list slot="content">
-      <app-show-tasks [task]="task" [editable]="editable"> </app-show-tasks>
+      <app-show-tasks [task]="task"> </app-show-tasks>
     </ion-list>
   </ion-accordion>
 </span>
@@ -19,7 +19,7 @@
     <app-task-card
       [task]="task"
       [highlight]="true"
-      [edit]="editable"
+      [edit]="true"
       [index]="index"
     ></app-task-card>
   </ion-item>

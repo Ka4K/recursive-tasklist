@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ITask } from '../interface/task';
-import { cloneTask, sortTask } from '../interface/task';
 import { TaskService } from '../shared/task.service';
 import { MakeChildModalComponent } from '../shared/make-child-modal/make-child-modal.component';
 @Component({
@@ -11,7 +10,6 @@ import { MakeChildModalComponent } from '../shared/make-child-modal/make-child-m
 })
 export class HomePage {
   task: ITask;
-  sort = false;
   constructor(
     private modalCtrl: ModalController,
     private taskService: TaskService
@@ -27,9 +25,5 @@ export class HomePage {
         },
       })
       .then((modal) => modal.present());
-  }
-
-  sortTasks(task: ITask): ITask {
-    return sortTask(cloneTask(task));
   }
 }

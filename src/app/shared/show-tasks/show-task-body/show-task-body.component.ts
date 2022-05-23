@@ -9,7 +9,6 @@ import { ITask } from 'src/app/interface/task';
 export class ShowTaskBodyComponent implements OnInit {
   @Input() index: number;
   @Input() task: ITask;
-  @Input() editable = true;
   constructor() {}
 
   ngOnInit(): void {}
