@@ -26,6 +26,11 @@ export class ManipulationTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.now = new Date().toISOString();
+    if (!this.maxDuedate) {
+      const t: Date = new Date();
+      t.setFullYear(t.getFullYear() + 1);
+      this.maxDuedate = t.toISOString();
+    }
   }
 
   update(task: ITask, name: string, date: string): void {
