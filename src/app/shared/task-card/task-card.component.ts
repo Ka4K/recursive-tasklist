@@ -10,7 +10,6 @@ export class TaskCardComponent implements OnInit {
   @Input() task: ITask;
   @Input() highlight = false;
   @Input() showRecent = false;
-  @Input() index: number | undefined;
 
   constructor() {}
   ngOnInit(): void {}
