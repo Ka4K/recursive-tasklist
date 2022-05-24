@@ -30,7 +30,7 @@ export class TaskService {
       task.recentDuedate = duedate;
       this.updateRecentAtCreate(task);
     } else {
-      this.updateRecentAtDelete(task.parent);
+      this.updateRecentAtDelete(task);
     }
     this.updateLocalstorage();
   };
@@ -100,6 +100,7 @@ export class TaskService {
       return;
     }
     parent.recentDuedate = parent.duedate;
+    console.log(parent);
     if (parent.children.length) {
       parent.children.forEach((a: ITask) => {
         if (a.recentDuedate && a.recentDuedate < parent.recentDuedate) {
