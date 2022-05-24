@@ -1,26 +1,79 @@
-<span *ngIf="hasChildren(task)">
+<div *ngIf="hasChildren(task)">
   <ion-accordion>
     <ion-item slot="header">
-      <app-task-card
-        [task]="task"
-        [highlight]="true"
-        [edit]="true"
-        [index]="index"
-        [showRecent]="true"
-      ></app-task-card>
+      <ion-item-sliding>
+        <ion-item>
+          <span>
+            <app-task-card
+              [task]="task"
+              [highlight]="true"
+              [index]="index"
+              [showRecent]="true"
+            ></app-task-card>
+            <div>
+              <ion-button
+                (click)="createChild($event)"
+                slot="end"
+                color="secondary"
+              >
+                <ion-icon name="add"></ion-icon>
+              </ion-button>
+              <ion-button
+                (click)="taskComplete($event)"
+                slot="end"
+                color="secondary"
+              >
+                <ion-icon name="checkbox"></ion-icon>
+              </ion-button>
+              <ion-button
+                (click)="renameTask($event)"
+                slot="end"
+                color="secondary"
+              >
+                <ion-icon name="pencil"></ion-icon>
+              </ion-button>
+            </div>
+          </span>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option (click)="deleteTask($event)" color="danger"
+            >delete</ion-item-option
+          >
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-item>
     <ion-list slot="content">
       <app-show-tasks [task]="task"> </app-show-tasks>
     </ion-list>
   </ion-accordion>
-</span>
-<span *ngIf="!hasChildren(task)">
-  <ion-item slot="header">
-    <app-task-card
-      [task]="task"
-      [highlight]="true"
-      [edit]="true"
-      [index]="index"
-    ></app-task-card>
+</div>
+<div *ngIf="!hasChildren(task)">
+  <ion-item>
+    <ion-item-sliding>
+      <ion-item>
+        <span>
+          <app-task-card
+            [task]="task"
+            [highlight]="true"
+            [index]="index"
+          ></app-task-card>
+          <ion-button (click)="createChild($event)" color="secondary">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+          <ion-button (click)="taskComplete($event)" color="secondary">
+            <ion-icon name="checkbox"></ion-icon>
+          </ion-button>
+          <ion-button (click)="renameTask($event)" color="secondary">
+            <ion-icon name="pencil"></ion-icon>
+          </ion-button>
+        </span>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="deleteTask($event)" color="danger"
+          >delete</ion-item-option
+        >
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-item>
-</span>
+</div>

@@ -1,27 +1,21 @@
-<ion-label>{{ task.name }}</ion-label>
-<span *ngIf="task.duedate">
-  <ion-label>
-    締切
-    <app-show-date [date]="task.duedate" [highlight]="highlight"></app-show-date
-  ></ion-label>
-</span>
-<span *ngIf="task.recentDuedate && showRecent">
-  <ion-label>
-    直近
-    <app-show-date
-      [date]="task.recentDuedate"
-      [highlight]="highlight"
-    ></app-show-date
-  ></ion-label>
-</span>
-<span *ngIf="edit">
-  <ion-button (click)="createChild($event)" slot="end" color="secondary">
-    <ion-icon name="add"></ion-icon>
-  </ion-button>
-  <ion-button (click)="taskComplete($event)" slot="end" color="secondary">
-    <ion-icon name="checkbox"></ion-icon>
-  </ion-button>
-  <ion-button (click)="changeTask($event)" slot="end" color="secondary">
-    <ion-icon name="pencil"></ion-icon>
-  </ion-button>
+<span>
+  <ion-label>{{ task.name }}</ion-label>
+  <div *ngIf="task.duedate">
+    <ion-label>
+      締切
+      <app-show-date
+        [date]="task.duedate"
+        [highlight]="highlight"
+      ></app-show-date
+    ></ion-label>
+  </div>
+  <div *ngIf="task.recentDuedate && showRecent">
+    <ion-label>
+      直近
+      <app-show-date
+        [date]="task.recentDuedate"
+        [highlight]="highlight"
+      ></app-show-date
+    ></ion-label>
+  </div>
 </span>
