@@ -100,7 +100,6 @@ export class TaskService {
       return;
     }
     parent.recentDuedate = parent.duedate;
-    console.log(parent);
     if (parent.children.length) {
       parent.children.forEach((a: ITask) => {
         if (a.recentDuedate && a.recentDuedate < parent.recentDuedate) {
