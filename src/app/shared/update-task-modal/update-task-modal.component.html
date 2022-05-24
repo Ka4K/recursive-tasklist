@@ -10,6 +10,7 @@
     [duedate]="task.duedate"
     [buttonName]="'変更'"
     [manipulation]="update"
+    [maxDuedate]="task.parent.duedate"
     [isModal]="true"
     [toastMsg]="'変更しました'"
   ></app-manipulation-task>
