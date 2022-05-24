@@ -1,4 +1,4 @@
-<div *ngIf="hasChildren(task)">
+<span *ngIf="hasChildren()">
   <ion-accordion>
     <ion-item slot="header">
       <ion-item-sliding>
@@ -7,32 +7,17 @@
             <app-task-card
               [task]="task"
               [highlight]="true"
-              [index]="index"
               [showRecent]="true"
             ></app-task-card>
-            <div>
-              <ion-button
-                (click)="createChild($event)"
-                slot="end"
-                color="secondary"
-              >
-                <ion-icon name="add"></ion-icon>
-              </ion-button>
-              <ion-button
-                (click)="taskComplete($event)"
-                slot="end"
-                color="secondary"
-              >
-                <ion-icon name="checkbox"></ion-icon>
-              </ion-button>
-              <ion-button
-                (click)="renameTask($event)"
-                slot="end"
-                color="secondary"
-              >
-                <ion-icon name="pencil"></ion-icon>
-              </ion-button>
-            </div>
+            <ion-button (click)="createChild($event)" color="secondary">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+            <ion-button (click)="taskComplete($event)" color="secondary">
+              <ion-icon name="checkbox"></ion-icon>
+            </ion-button>
+            <ion-button (click)="renameTask($event)" color="secondary">
+              <ion-icon name="pencil"></ion-icon>
+            </ion-button>
           </span>
         </ion-item>
         <ion-item-options side="end">
@@ -46,8 +31,8 @@
       <app-show-tasks [task]="task"> </app-show-tasks>
     </ion-list>
   </ion-accordion>
-</div>
-<div *ngIf="!hasChildren(task)">
+</span>
+<span *ngIf="!hasChildren()">
   <ion-item>
     <ion-item-sliding>
       <ion-item>
@@ -55,7 +40,7 @@
           <app-task-card
             [task]="task"
             [highlight]="true"
-            [index]="index"
+            [showRecent]="true"
           ></app-task-card>
           <ion-button (click)="createChild($event)" color="secondary">
             <ion-icon name="add"></ion-icon>
@@ -68,7 +53,6 @@
           </ion-button>
         </span>
       </ion-item>
-
       <ion-item-options side="end">
         <ion-item-option (click)="deleteTask($event)" color="danger"
           >delete</ion-item-option
@@ -76,4 +60,4 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-item>
-</div>
+</span>

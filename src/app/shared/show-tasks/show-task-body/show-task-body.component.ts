@@ -38,8 +38,8 @@ export class ShowTaskBodyComponent implements OnInit {
       })
       .then((modal) => modal.present());
   }
-  hasChildren(t: ITask): boolean {
-    return !!t.children.length;
+  hasChildren(): boolean {
+    return !!this.task.children.length;
   }
   taskComplete($event): void {
     $event.stopPropagation();
