@@ -10,6 +10,7 @@ import { MakeChildModalComponent } from '../shared/make-child-modal/make-child-m
 })
 export class HomePage {
   task: ITask;
+  modalOpening = false;
   constructor(
     private modalCtrl: ModalController,
     private taskService: TaskService
@@ -17,6 +18,7 @@ export class HomePage {
     this.task = this.taskService.rootTask();
   }
   addTask(): void {
+    this.modalOpening = true;
     this.modalCtrl
       .create({
         component: MakeChildModalComponent,
@@ -24,6 +26,6 @@ export class HomePage {
           parent: this.task,
         },
       })
-      .then((modal) => modal.present());
+      .then((modal) => modal.present().then(() => (this.modalOpening = false)));
   }
 }
