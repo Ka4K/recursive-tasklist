@@ -1,9 +1,16 @@
-<app-manipulation-task
-  [task]="task"
-  [name]="task.name"
-  [duedate]="task.duedate"
-  [buttonName]="'変更'"
-  [manipulation]="update"
-  [isModal]="true"
-  [toastMsg]="'変更しました'"
-></app-manipulation-task>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> タスク変更 </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-manipulation-task
+    [task]="task"
+    [name]="task.name"
+    [duedate]="task.duedate"
+    [buttonName]="'変更'"
+    [manipulation]="update"
+    [isModal]="true"
+    [toastMsg]="'変更しました'"
+  ></app-manipulation-task>
+</ion-content>

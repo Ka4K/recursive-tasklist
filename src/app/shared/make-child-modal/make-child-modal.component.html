@@ -1,7 +1,14 @@
-<app-manipulation-task
-  [task]="task"
-  [buttonName]="'作成'"
-  [manipulation]="addTask"
-  [isModal]="true"
-  [toastMsg]="'作成しました'"
-></app-manipulation-task>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> タスク作成 </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-manipulation-task
+    [task]="task"
+    [buttonName]="'作成'"
+    [manipulation]="addTask"
+    [isModal]="true"
+    [toastMsg]="'作成しました'"
+  ></app-manipulation-task>
+</ion-content>
