@@ -30,7 +30,7 @@ export class TaskService {
       task.recentDuedate = duedate;
       this.updateRecentAtCreate(task);
     } else {
-      this.updateRecentAtDelete(task.parent, task.parent.recentDuedate);
+      this.updateRecentAtDelete(task.parent);
     }
     this.updateLocalstorage();
   };
@@ -42,7 +42,7 @@ export class TaskService {
   deleteChild = (parent: ITask, idx: number): void => {
     parent.children.splice(idx, 1);
     parent.children = [...parent.children];
-    this.updateRecentAtDelete(parent, parent.recentDuedate);
+    this.updateRecentAtDelete(parent);
     this.updateLocalstorage();
   };
   clearTasks = (): void => {
@@ -95,18 +95,18 @@ export class TaskService {
     task.parent.recentDuedate = task.recentDuedate;
     this.updateRecentAtCreate(task.parent);
   }
-  private updateRecentAtDelete(parent: ITask, beforeDuedate: string): void {
-    if (!beforeDuedate || !parent.parent) {
+  private updateRecentAtDelete(parent: ITask): void {
+    if (!parent.parent) {
       return;
     }
-    const parentDuedate: string = parent.parent.recentDuedate;
+    parent.recentDuedate = parent.duedate;
     if (parent.children.length) {
-      parent.recentDuedate = parent.children.reduce((a: ITask, b: ITask) =>
-        a.duedate && a.duedate < b.duedate ? a : b
-      ).duedate;
-    } else {
-      parent.recentDuedate = parent.duedate;
+      parent.children.forEach((a: ITask) => {
+        if (a.recentDuedate && a.recentDuedate < parent.recentDuedate) {
+          parent.recentDuedate = a.recentDuedate;
+        }
+      });
     }
-    this.updateRecentAtDelete(parent.parent, parentDuedate);
+    this.updateRecentAtDelete(parent.parent);
   }
 }
