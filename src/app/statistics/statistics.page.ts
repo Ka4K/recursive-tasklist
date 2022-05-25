@@ -12,7 +12,6 @@ export class StatisticsPage implements OnInit {
   calendarOptions: CalendarOptions = {
     tooltipEnabled: false,
   };
-  isMobile: boolean;
   constructor(private taskProgress: TaskProgressService) {
     this.calendarData = taskProgress.getCalendarData();
   }
