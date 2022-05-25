@@ -15,7 +15,7 @@ export class TaskService {
   rootTask(): ITask {
     return this.root;
   }
-  loadTasks(): void {
+  async loadTasks(): Promise<void> {
     this.storage.get('task').then((data) => {
       if (data) {
         this.root.children = JSON.parse(data);
@@ -64,7 +64,7 @@ export class TaskService {
   private initStorage(): void {
     this.storage.create();
   }
-  private updateLocalstorage(): void {
+  private async updateLocalstorage(): Promise<void> {
     this.storage.set(
       'task',
       JSON.stringify(this.root.children, [
@@ -83,7 +83,7 @@ export class TaskService {
       }
     });
   }
-  private updateRecentAtCreate(task: ITask): void {
+  private async updateRecentAtCreate(task: ITask): Promise<void> {
     if (
       !task.parent.parent ||
       !task.recentDuedate ||
@@ -95,7 +95,7 @@ export class TaskService {
     task.parent.recentDuedate = task.recentDuedate;
     this.updateRecentAtCreate(task.parent);
   }
-  private updateRecentAtDelete(parent: ITask): void {
+  private async updateRecentAtDelete(parent: ITask): Promise<void> {
     if (!parent.parent) {
       return;
     }
