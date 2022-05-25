@@ -17,4 +17,28 @@
       ></ng-calendar-heatmap>
     </div>
   </div>
+  <cdk-virtual-scroll-viewport
+    [itemSize]="20"
+    class="example-viewport"
+    [minBufferPx]="200"
+    [maxBufferPx]="500"
+  >
+    <ion-text>
+      <h3>完了済みのタスク</h3>
+    </ion-text>
+    <ion-list>
+      <ion-item *ngFor="let t of completedTasks" class="completed-tasks">
+        <ion-text
+          >{{ t.name }}<br />
+          完了日
+          <app-show-date
+            [date]="t.completedDate"
+            [highlight]="false"
+          ></app-show-date
+          ><br />
+          {{t.path}}
+        </ion-text>
+      </ion-item>
+    </ion-list>
+  </cdk-virtual-scroll-viewport>
 </ion-content>

@@ -61,6 +61,15 @@ export class TaskService {
     pushChild(this.root, '');
     return tasks;
   }
+  getPath(task: ITask): string {
+    return this.getPathIMPL(task, '/');
+  }
+  private getPathIMPL(task: ITask, path: string): string {
+    if (!task.parent) {
+      return path;
+    }
+    return this.getPathIMPL(task.parent, '/' + task.name + path);
+  }
   private initStorage(): void {
     this.storage.create();
   }

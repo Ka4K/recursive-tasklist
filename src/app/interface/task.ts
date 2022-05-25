@@ -8,6 +8,9 @@ export interface ITask {
 export interface ITaskWithPath extends ITask {
   path: string;
 }
+export interface ITaskWithComplete extends ITaskWithPath {
+  completedDate: string;
+}
 export const newTask = (
   name: string,
   parent: ITask,

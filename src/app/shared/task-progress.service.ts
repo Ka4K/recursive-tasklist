@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { CalendarData } from 'ng-calendar-heatmap';
+import { ITaskWithComplete, ITask } from '../interface/task';
+import { TaskService } from './task.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +11,21 @@ export class TaskProgressService {
   private completeBeforeDuedate = 0;
   private completeAfterDuedate = 0;
   private calendarData: CalendarData[] = [];
-  constructor(private storage: Storage) {
+  private completedTasks: ITaskWithComplete[] = [];
+  constructor(private storage: Storage, private taskService: TaskService) {
     this.initStorage();
   }
-  increseComplete(duedate: string): void {
+  increseComplete(task: ITask): void {
+    const duedate = task.duedate;
     const today = new Date().toISOString();
+    this.completedTasks = [
+      ...this.completedTasks,
+      {
+        ...task,
+        path: this.taskService.getPath(task.parent),
+        completedDate: today,
+      },
+    ];
     if (duedate) {
       if (this.compareDate(duedate, today)) {
         this.completeBeforeDuedate++;
@@ -62,13 +74,22 @@ export class TaskProgressService {
         this.calendarData.map((elm) => (elm.date = new Date(elm.date)));
       }
     });
+    this.storage.get('completedTasks').then((data) => {
+      if (data) {
+        this.completedTasks = JSON.parse(data);
+      }
+    });
   }
   clearCompleted = (): void => {
     this.completeBeforeDuedate = 0;
     this.completeAfterDuedate = 0;
     this.calendarData = [];
+    this.completedTasks = [];
     this.updateLocalstorage();
   };
+  getCompletedTasks(): ITaskWithComplete[] {
+    return this.completedTasks;
+  }
   private initStorage(): void {
     this.storage.create();
   }
@@ -85,5 +106,16 @@ export class TaskProgressService {
     );
     this.storage.set('completeAfterDuedate', String(this.completeAfterDuedate));
     this.storage.set('calendarData', JSON.stringify(this.calendarData));
+    this.storage.set(
+      'completedTasks',
+      JSON.stringify(this.completedTasks, [
+        'name',
+        'duedate',
+        'recentDuedate',
+        'children',
+        'completedDate',
+        'path',
+      ])
+    );
   }
 }

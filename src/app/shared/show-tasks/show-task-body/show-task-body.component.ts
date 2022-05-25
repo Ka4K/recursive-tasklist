@@ -44,7 +44,7 @@ export class ShowTaskBodyComponent implements OnInit {
   taskComplete($event): void {
     $event.stopPropagation();
     $event.preventDefault();
-    this.taskManager.increseComplete(this.task.duedate);
+    this.taskManager.increseComplete(this.task);
     this.taskServise.deleteChild(this.task.parent, this.index);
   }
   renameTask($event): void {

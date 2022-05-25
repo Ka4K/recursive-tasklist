@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarData, CalendarOptions } from 'ng-calendar-heatmap';
 import { TaskProgressService } from '../shared/task-progress.service';
+import { ITaskWithComplete } from '../interface/task';
 
 @Component({
   selector: 'app-statistics',
@@ -12,8 +13,10 @@ export class StatisticsPage implements OnInit {
   calendarOptions: CalendarOptions = {
     tooltipEnabled: false,
   };
-  constructor(private taskProgress: TaskProgressService) {
-    this.calendarData = taskProgress.getCalendarData();
+  completedTasks: ITaskWithComplete[];
+  constructor(private taskProgress: TaskProgressService) {}
+  ngOnInit(): void {
+    this.calendarData = this.taskProgress.getCalendarData();
+    this.completedTasks = this.taskProgress.getCompletedTasks();
   }
-  ngOnInit(): void {}
 }
